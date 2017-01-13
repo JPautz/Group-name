@@ -1,17 +1,23 @@
-# Team Project <put your project name here ...>
-Teamname <put your team name here ...>
+# Flowcharting Tool
+Group Name
 
 ##1. Description
 
-Briefly list the purpose of your software system in a few short full sentences.
+To provide students of Cal Poly SLO a flowcharting tool to help students plan their academic career.
 
 ##2.	List of features
 
-In bullet points: give your proposed software system a name and list the 5-10 key features.
+Software Name
+* Table representation of planned courses
+* Filter by GE Area
+* Method of showing prequisites
+* Course availability by term
+* List showing courses that need to be taken
+* Dragging mechanism to drop courses into table
 
 ##3.	Requirements
 
-Summarize the major requirements. List as full sentences.
+We want the user to be able to know how many courses he/she has left to take and to be able to intuitively plan their academic career.
 
 ##4.	Architecture
 
@@ -19,12 +25,13 @@ Use a UML deployment diagram to show the overall system architecture and the sys
 
 ##5.	Technologies
 
-List the Java technologies and frameworks that you are planning to use.
+Serverside - Java
+Clientside - Javascript
 
 ##6.	Project Breakdown, Timeline and Milestones
 
-Estimate workload, define Milestones and a timeline when to complete implementation for the above listed requirements.
+A prototype should be done by the end of this quarter and a full release should be done by the end of the next quarter.
 
 ##7.	Risks and Uncertainties
 
-List possible risks and other uncertainties which might delay or stop the proposed project.
+Information that we might need would not be available.
