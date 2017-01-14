@@ -17,7 +17,8 @@ Software Name
 
 ##3.	Requirements
 
-We want the user to be able to know how many courses he/she has left to take and to be able to intuitively plan their academic career.
+* To simplify the course planning process as much as possible.
+* Let the user to be able to know how many courses he/she has left to take and to be able to let the user intuitively plan their academic career.
 
 ##4.	Architecture
 
@@ -26,12 +27,37 @@ Use a UML deployment diagram to show the overall system architecture and the sys
 ##5.	Technologies
 
 Serverside - Java
+
 Clientside - Javascript
 
 ##6.	Project Breakdown, Timeline and Milestones
 
-A prototype should be done by the end of this quarter and a full release should be done by the end of the next quarter.
+For the first version of Software Name:
+
+Initial Planning Completion
+* Projected date: 1/20/2017
+* Understanding of project capabilities and limitations
+* Understanding of what the UI will look like
+
+Specification Analysis Completion
+* Projected date: 1/27/2017
+* Transcribing the high-level thoughts in the planning phase into unambiguous requirements. 
+
+Design and Initial Development Completion
+* Projected date: //2017
+* Understanding of the structure of the program.
+* Understanding of the technologies and libraries that are to be used.
+
+Implementation Completion
+* Projected date: //2017
+* Implementation of the specification
+
+Testing and Integration Completion
+* Projected date: //2017
+* Evaluating the implementation
+
 
 ##7.	Risks and Uncertainties
 
-Information that we might need would not be available.
+* Information that we might need would not be available. For instance, we do not currently have access to the information PolyPlanner or PASS uses.
+* The intuivity of our user interface.
