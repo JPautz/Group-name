@@ -26,7 +26,7 @@ __Software Name__
 
 ##5.	Technologies
 
-__Serversiude__
+__Serverside__
 * Java
 
 __Clientside__
