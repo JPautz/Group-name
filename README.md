@@ -38,12 +38,12 @@ __Database__
 ##6.	Project Breakdown, Timeline and Milestones
 
 __Initial Planning Completion__
-* Projected date: 1/20/2017
+* Projected date: 1/22/2017
 * Understanding of project capabilities and limitations.
 * Understanding of what the UI will look like.
 
 __Specification Analysis Completion__
-* Projected date: 1/27/2017
+* Projected date: 1/29/2017
 * Transcribing the high-level thoughts in the planning phase into unambiguous requirements. 
 
 __Design and Initial Development Completion__
