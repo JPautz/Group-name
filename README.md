@@ -36,8 +36,8 @@ For the first version of Software Name:
 
 Initial Planning Completion
 * Projected date: 1/20/2017
-* Understanding of project capabilities and limitations
-* Understanding of what the UI will look like
+* Understanding of project capabilities and limitations.
+* Understanding of what the UI will look like.
 
 Specification Analysis Completion
 * Projected date: 1/27/2017
@@ -50,11 +50,11 @@ Design and Initial Development Completion
 
 Implementation Completion
 * Projected date: //2017
-* Implementation of the specification
+* Implementation of the specification.
 
 Testing and Integration Completion
 * Projected date: //2017
-* Evaluating the implementation
+* Evaluation of implementation.
 
 
 ##7.	Risks and Uncertainties
