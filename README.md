@@ -1,13 +1,13 @@
 # Flowcharting Tool
-Group Name
+__Group Name__
 
 ##1. Description
 
-To provide students of Cal Poly SLO a flowcharting tool to help students plan their academic career.
+To provide the students of Cal Poly SLO a flowcharting tool that will help them plan their academic careers.
 
 ##2.	List of features
 
-Software Name
+__Software Name__
 * Table representation of planned courses
 * Filter by GE Area
 * Method of showing prequisites
@@ -22,37 +22,40 @@ Software Name
 
 ##4.	Architecture
 
-Use a UML deployment diagram to show the overall system architecture and the system components. Use draw.io to draw the diagram. For reference check: (https://www.nomagic.com/images/guides/no_magic_quick_reference_guide_uml.pdf)
+![UML deployment diagram](http://i.imgur.com/riwnsQg.png)
 
 ##5.	Technologies
 
-Serverside - Java
+__Serversiude__
+* Java
 
-Clientside - Javascript
+__Clientside__
+* Javascript
+
+__Database__
+* MySQL
 
 ##6.	Project Breakdown, Timeline and Milestones
 
-For the first version of Software Name:
-
-Initial Planning Completion
+__Initial Planning Completion__
 * Projected date: 1/20/2017
 * Understanding of project capabilities and limitations.
 * Understanding of what the UI will look like.
 
-Specification Analysis Completion
+__Specification Analysis Completion__
 * Projected date: 1/27/2017
 * Transcribing the high-level thoughts in the planning phase into unambiguous requirements. 
 
-Design and Initial Development Completion
+__Design and Initial Development Completion__
 * Projected date: //2017
 * Understanding of the structure of the program.
 * Understanding of the technologies and libraries that are to be used.
 
-Implementation Completion
+__Implementation Completion__
 * Projected date: //2017
 * Implementation of the specification.
 
-Testing and Integration Completion
+__Testing and Integration Completion__
 * Projected date: //2017
 * Evaluation of implementation.
 
