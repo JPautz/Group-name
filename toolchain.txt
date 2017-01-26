@@ -1,5 +1,5 @@
-IDE: 
-UML Drawing: http://draw.io
+IDE: IntelliJ
+UML Drawing: draw.io
 Version control: git and github
-Project management: 
-Prototyping: 
+Project management: waffle.io
+Prototyping: figma
