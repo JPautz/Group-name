@@ -5,19 +5,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * Created by gcloonan on 3/2/17.
- */
-public class year {
+public class Year {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private String date;
     private boolean showSummer;
 
-    public year() {}
+    public Year() {}
 
-    public year(String date, boolean showSummer) {
+    public Year(String date, boolean showSummer) {
         this.date = date;
         this.showSummer = showSummer;
     }
