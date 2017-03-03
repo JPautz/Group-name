@@ -29,6 +29,6 @@ public class year {
     public void setDate(String date) { this.date = date; }
 
     public void toggleSummer() {
-        this.showSummer != this.showSummer;
+        this.showSummer =  !this.showSummer;
     }
 }
