@@ -14,7 +14,7 @@ public class CourseController {
 
     @GetMapping
     public ArrayList<Course> listAll() {
-        ArrayList<Course> courses = new ArrayList<Course>();
+        ArrayList<Course> courses = new ArrayList<>();
         courseRepository.findAll().forEach(course -> courses.add(course));
         return courses;
     }
