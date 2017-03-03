@@ -13,12 +13,21 @@ public class Flowchart {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
     private String name;
     private ArrayList<Year> years;
 
     public Flowchart(String name) {
         this.name = name;
         this.years = new ArrayList<Year>();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

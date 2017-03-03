@@ -3,11 +3,17 @@ package base.catalog;
 import base.course.Course;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.HashMap;
 
 @Entity
 public class Catalog {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
     private HashMap<String, Course> courseCatalog;
 
     public Catalog(){
@@ -35,5 +41,13 @@ public class Catalog {
         String title = c.getTitle();
         String s = title.concat(" "+ prefix);
         courseCatalog.remove(s);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
