@@ -14,6 +14,9 @@ public class Course {
     private String prefix;
     private String number;
     private String title;
+    private int units;
+    private String prerequisites;
+    private String description;
 
     public Course (){};
 
