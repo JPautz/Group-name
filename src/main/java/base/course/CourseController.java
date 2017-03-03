@@ -26,7 +26,8 @@ public class CourseController {
 
     @PostMapping
     public Course create(@RequestBody Course input) {
-        return courseRepository.save(new Course(input.getPrefix(), input.getNumber(), input.getTitle()));
+        return courseRepository.save(new Course(input.getPrefix(), input.getNumber(), input.getTitle(),
+                input.getUnits(), input.getPrerequisites(), input.getDescription(), input.getTermsOffered()));
     }
 
     @DeleteMapping("{id}")
@@ -43,6 +44,10 @@ public class CourseController {
             course.setNumber(input.getNumber());
             course.setPrefix(input.getPrefix());
             course.setTitle(input.getTitle());
+            course.setUnits(input.getUnits());
+            course.setPrerequisites(input.getPrerequisites());
+            course.setDescription(input.getDescription());
+            course.setTermsOffered(input.getTermsOffered());
             return courseRepository.save(course);
         }
     }

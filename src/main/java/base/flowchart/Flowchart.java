@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
 
 @Entity
 public class Flowchart {
@@ -22,6 +23,10 @@ public class Flowchart {
 
     public String getName() {
         return name;
+    }
+
+    public ArrayList<Year> getYears() {
+        return years;
     }
 
     public void setName(String name) {
