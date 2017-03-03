@@ -14,16 +14,22 @@ public class Course {
     private String prefix;
     private String number;
     private String title;
+
     private int units;
     private String prerequisites;
     private String description;
+    private String termsOffered;
 
     public Course (){};
 
-    public Course(String prefix, String number, String title) {
+    public Course(String prefix, String number, String title, int units, String prerequisites, String description, String termsOffered) {
         this.prefix = prefix;
         this.number = number;
         this.title = title;
+        this.description = description;
+        this.units = units;
+        this.prerequisites = prerequisites;
+        this.termsOffered = termsOffered;
     }
 
     public Long getId() {
@@ -56,5 +62,37 @@ public class Course {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getUnits() {
+        return units;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
+
+    public String getPrerequisites() {
+        return prerequisites;
+    }
+
+    public void setPrerequisites(String prerequisites) {
+        this.prerequisites = prerequisites;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTermsOffered() {
+        return termsOffered;
+    }
+
+    public void setTermsOffered(String termsOffered) {
+        this.termsOffered = termsOffered;
     }
 }
