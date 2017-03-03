@@ -1,5 +1,7 @@
 package base.flowchart;
 
+import base.year.Year;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
