@@ -54,7 +54,7 @@ public class Student {
         this.id = id;
     }
 
-    public void setForename(String forname) {
+    public void setForename(String forename) {
         this.forename = forename;
     }
 
