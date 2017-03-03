@@ -36,9 +36,4 @@ public class Catalog {
         String s = title.concat(" "+ prefix);
         courseCatalog.remove(s);
     }
-
-
-
-
-
 }
