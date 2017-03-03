@@ -14,7 +14,7 @@ public class StudentController {
 
     @GetMapping
     public ArrayList<Student> listAll() {
-        ArrayList<Student> students = new ArrayList<>();
+        ArrayList<Student> students = new ArrayList<Student>();
         studentRepository.findAll().forEach(student -> students.add(student));
         return students;
     }
