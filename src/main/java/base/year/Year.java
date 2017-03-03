@@ -40,8 +40,8 @@ public class Year {
 
     public void setDate(String date) { this.date = date; }
 
-    public void toggleSummer() {
-        this.showSummer =  !this.showSummer;
+    public void setShowSummer(boolean showSummer) {
+        this.showSummer =  showSummer;
     }
 
     public ArrayList<Quarter> getQuarters() {
