@@ -55,11 +55,11 @@ public class Student {
     }
 
     public void setForename(String forname) {
-        this.surname = surname;
+        this.forename = forename;
     }
 
     public void setSurname(String surname) {
-        this.forename = forename;
+        this.surname = surname;
     }
 
     public void setEmail(String email) {
