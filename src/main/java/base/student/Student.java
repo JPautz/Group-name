@@ -15,7 +15,7 @@ public class Student {
     private String surname;
     private String email;
     private String token;
-    // private ArrayList<Flowchart> flowcharts;
+    private ArrayList<Flowchart> flowcharts;
 
     public Student (){};
 
@@ -24,6 +24,7 @@ public class Student {
         this.surname = surname;
         this.email = email;
         this.token = token;
+        this.flowcharts = new ArrayList<Flowchart>();
     }
 
     public Long getId() {
