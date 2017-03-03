@@ -15,7 +15,7 @@ public class YearController {
     @GetMapping
     public ArrayList<Year> listAll() {
         ArrayList<Year> years = new ArrayList<>();
-        yearRepository.findAll().forEach(year -> year.add(year));
+        yearRepository.findAll().forEach(year -> years.add(year));
         return years;
     }
 
