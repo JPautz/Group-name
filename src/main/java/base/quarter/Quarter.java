@@ -14,10 +14,9 @@ public class Quarter {
     private QuarterName quarter;
     private ArrayList<Course> courses;
 
-    public Quarter (){};
-
     public Quarter(QuarterName quarter) {
         this.quarter = quarter;
+        this.courses = new ArrayList<Course>();
     }
 
     public Long getId() {
