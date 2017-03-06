@@ -1,5 +1,0 @@
-IDE: IntelliJ
-UML Drawing: draw.io
-Version control: git and github
-Project management: waffle.io
-Prototyping: figma
