@@ -3,7 +3,10 @@ package base.catalog;
 import base.course.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 @RestController
@@ -39,16 +42,17 @@ public class CatalogController {
         catalogs.get(0).addCourse(add);
         return catalogRepository.save(catalogs.get(0));
     }
-    /*
+
     @PutMapping("{id}")
     public Catalog addCourse(@PathVariable Long courseId) {
         ArrayList<Catalog> catalogs = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
-        Course c = restTemplate.getForObject("http://localhost:8080/course", Course.class, )
+        URI targetUrl = UriComponentsBuilder.fromUriString("http://localhost:8080").path("/course").queryParam("id", courseId).build().toUri();
+        Course c = restTemplate.getForObject(targetUrl, Course.class);
         catalogRepository.findAll().forEach(catalog -> catalogs.add(catalog));
-        catalogs.get(0).addCourse(add);
+        catalogs.get(0).addCourse(c);
         return catalogRepository.save(catalogs.get(0));
-    }*/
+    }
 
     @DeleteMapping("{name}")
     public Catalog deleteCourse(@PathVariable String removeParam) {
