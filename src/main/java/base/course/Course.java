@@ -1,9 +1,9 @@
 package base.course;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import base.quarter.Quarter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -19,8 +19,10 @@ public class Course {
     private String prerequisites;
     private String description;
     private String termsOffered;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "course")
+    private List<Quarter> quarters;
 
-    public Course (){};
+    public Course() {}
 
     public Course(String prefix, String number, String title, int units, String prerequisites, String description, String termsOffered) {
         this.prefix = prefix;

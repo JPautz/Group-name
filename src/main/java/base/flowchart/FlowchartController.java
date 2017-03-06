@@ -25,10 +25,10 @@ public class FlowchartController {
         return flowchartRepository.findOne(id);
     }
 
-    @PostMapping
+    /*@PostMapping
     public Flowchart create(@RequestBody Flowchart input) {
         return flowchartRepository.save(new Flowchart(input.getName()));
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {

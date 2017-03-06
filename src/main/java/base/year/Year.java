@@ -1,13 +1,12 @@
 package base.year;
 
+import base.flowchart.Flowchart;
 import base.quarter.Quarter;
 import base.quarter.QuarterName;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Year {
@@ -17,7 +16,10 @@ public class Year {
     private Long id;
     private String name;
     private boolean showSummer;
-    private ArrayList<Quarter> quarters;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Flowchart flowchart;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "year")
+    private List<Quarter> quarters;
 
     public Year() {}
 
@@ -42,6 +44,10 @@ public class Year {
         this.id = id;
     }
 
+    public void setFlowchart(Flowchart flowchart) {
+        this.flowchart = flowchart;
+    }
+
     public String getName() { return name; }
 
     public boolean getShowSummer() { return showSummer; }
@@ -52,7 +58,7 @@ public class Year {
         this.showSummer =  showSummer;
     }
 
-    public ArrayList<Quarter> getQuarters() {
+    public List<Quarter> getQuarters() {
         return quarters;
     }
 

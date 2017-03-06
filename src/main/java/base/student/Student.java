@@ -2,11 +2,9 @@ package base.student;
 
 import base.flowchart.Flowchart;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -18,9 +16,10 @@ public class Student {
     private String surname;
     private String email;
     private String token;
-    private ArrayList<Flowchart> flowcharts;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
+    private List<Flowchart> flowcharts;
 
-    public Student (){};
+    public Student () {}
 
     public Student(String forename, String surname, String email, String token) {
         this.forename = forename;
@@ -32,10 +31,10 @@ public class Student {
     }
 
     public void initializeFlowcharts() {
-        for (int i=0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             String name = "Flowchart ";
-            name += Integer.toString(i+1);
-            this.flowcharts.add(new Flowchart(name));
+            name += Integer.toString(i + 1);
+            this.flowcharts.add(new Flowchart(name, this));
         }
     }
 
@@ -59,7 +58,7 @@ public class Student {
         return token;
     }
 
-    public ArrayList<Flowchart> getFlowcharts() { return flowcharts; }
+    public List<Flowchart> getFlowcharts() { return flowcharts; }
 
     public void setId(Long id) {
         this.id = id;

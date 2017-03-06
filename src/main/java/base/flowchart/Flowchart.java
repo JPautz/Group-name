@@ -1,13 +1,12 @@
 package base.flowchart;
 
+import base.student.Student;
 import base.year.Year;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Flowchart {
@@ -16,11 +15,17 @@ public class Flowchart {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
-    private ArrayList<Year> years;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Student student;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flowchart")
+    private List<Year> years;
 
-    public Flowchart(String name) {
+    public Flowchart() {}
+
+    public Flowchart(String name, Student student) {
         this.name = name;
         this.years = new ArrayList<Year>();
+        this.student = student;
         initializeYears();
     }
 
@@ -39,11 +44,15 @@ public class Flowchart {
         this.id = id;
     }
 
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public String getName() {
         return name;
     }
 
-    public ArrayList<Year> getYears() {
+    public List<Year> getYears() {
         return years;
     }
 

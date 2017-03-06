@@ -1,12 +1,11 @@
 package base.quarter;
 
 import base.course.Course;
+import base.year.Year;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Quarter {
@@ -15,7 +14,12 @@ public class Quarter {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private QuarterName quarter;
-    private ArrayList<Course> courses;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Year year;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "quarter")
+    private List<Course> courses;
+
+    public Quarter() {}
 
     public Quarter(QuarterName quarter) {
         this.quarter = quarter;
@@ -34,7 +38,7 @@ public class Quarter {
         return quarter;
     }
 
-    public ArrayList<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
@@ -52,5 +56,9 @@ public class Quarter {
 
     public void setQuarter(QuarterName quarter) {
         this.quarter = quarter;
+    }
+
+    public void setYear(Year year) {
+        this.year = year;
     }
 }
