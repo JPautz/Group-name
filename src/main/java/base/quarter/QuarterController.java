@@ -24,10 +24,10 @@ public class QuarterController {
         return quarterRepository.findOne(id);
     }
 
-    @PostMapping
+    /*@PostMapping
     public Quarter create(@RequestBody Quarter input) {
         return quarterRepository.save(new Quarter(input.getQuarter()));
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {

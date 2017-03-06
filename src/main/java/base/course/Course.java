@@ -24,7 +24,8 @@ public class Course {
 
     public Course() {}
 
-    public Course(String prefix, String number, String title, int units, String prerequisites, String description, String termsOffered) {
+    public Course(String prefix, String number, String title, int units, String prerequisites, String description,
+                  String termsOffered, Quarter quarter) {
         this.prefix = prefix;
         this.number = number;
         this.title = title;
@@ -32,6 +33,7 @@ public class Course {
         this.units = units;
         this.prerequisites = prerequisites;
         this.termsOffered = termsOffered;
+        this.quarters.add(quarter);
     }
 
     public Long getId() {

@@ -23,17 +23,18 @@ public class Year {
 
     public Year() {}
 
-    public Year(String name, boolean showSummer) {
+    public Year(String name, boolean showSummer, Flowchart flowchart) {
         this.name = name;
         this.showSummer = showSummer;
         this.quarters = new ArrayList<Quarter>();
+        this.flowchart = flowchart;
         initializeQuarters();
     }
 
     public void initializeQuarters() {
-        this.quarters.add(new Quarter(QuarterName.FALL));
-        this.quarters.add(new Quarter(QuarterName.WINTER));
-        this.quarters.add(new Quarter(QuarterName.SPRING));
+        this.quarters.add(new Quarter(QuarterName.FALL, this));
+        this.quarters.add(new Quarter(QuarterName.WINTER, this));
+        this.quarters.add(new Quarter(QuarterName.SPRING, this));
     }
 
     public Long getId() {

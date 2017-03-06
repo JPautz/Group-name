@@ -30,10 +30,10 @@ public class Flowchart {
     }
 
     public void initializeYears() {
-        this.years.add(new Year("Freshman", false));
-        this.years.add(new Year("Sophomore", false));
-        this.years.add(new Year("Junior", false));
-        this.years.add(new Year("Senior", false));
+        this.years.add(new Year("Freshman", false, this));
+        this.years.add(new Year("Sophomore", false, this));
+        this.years.add(new Year("Junior", false, this));
+        this.years.add(new Year("Senior", false, this));
     }
 
     public Long getId() {

@@ -21,9 +21,10 @@ public class Quarter {
 
     public Quarter() {}
 
-    public Quarter(QuarterName quarter) {
+    public Quarter(QuarterName quarter, Year year) {
         this.quarter = quarter;
         this.courses = new ArrayList<Course>();
+        this.year = year;
         initializeCourses();
     }
 

@@ -22,10 +22,10 @@ public class YearController {
     @GetMapping("{id}")
     public Year find(@PathVariable Long id) { return yearRepository.findOne(id); }
 
-    @PostMapping
+    /*@PostMapping
     public Year create(@RequestBody Year input) {
         return yearRepository.save(new Year(input.getName(), input.getShowSummer()));
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) { yearRepository.delete(id); }

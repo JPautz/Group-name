@@ -24,11 +24,11 @@ public class CourseController {
         return courseRepository.findOne(id);
     }
 
-    @PostMapping
+    /*@PostMapping
     public Course create(@RequestBody Course input) {
         return courseRepository.save(new Course(input.getPrefix(), input.getNumber(), input.getTitle(),
                 input.getUnits(), input.getPrerequisites(), input.getDescription(), input.getTermsOffered()));
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
