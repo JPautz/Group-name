@@ -16,7 +16,7 @@ public class Quarter {
     private QuarterName quarter;
     @ManyToOne(fetch=FetchType.LAZY)
     private Year year;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "quarter")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "quarters")
     private List<Course> courses;
 
     public Quarter() {}

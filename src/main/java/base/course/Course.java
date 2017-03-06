@@ -3,6 +3,7 @@ package base.course;
 import base.quarter.Quarter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Course {
     private String prerequisites;
     private String description;
     private String termsOffered;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "course")
+    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Quarter> quarters;
 
     public Course() {}
@@ -33,6 +34,7 @@ public class Course {
         this.units = units;
         this.prerequisites = prerequisites;
         this.termsOffered = termsOffered;
+        this.quarters = new ArrayList<Quarter>();
         this.quarters.add(quarter);
     }
 
