@@ -43,6 +43,10 @@ public class Catalog {
         courseCatalog.remove(s);
     }
 
+    public void removeKey(String param) {
+        courseCatalog.remove(param);
+    }
+
     public Long getId() {
         return id;
     }
