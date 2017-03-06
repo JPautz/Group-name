@@ -28,6 +28,15 @@ public class Student {
         this.email = email;
         this.token = token;
         this.flowcharts = new ArrayList<Flowchart>();
+        initializeFlowcharts();
+    }
+
+    public void initializeFlowcharts() {
+        for (int i=0; i < 5; i++) {
+            String name = "Flowchart ";
+            name += Integer.toString(i+1);
+            this.flowcharts.add(new Flowchart(name));
+        }
     }
 
     public Long getId() {
@@ -49,6 +58,8 @@ public class Student {
     public String getToken() {
         return token;
     }
+
+    public ArrayList<Flowchart> getFlowcharts() { return flowcharts; }
 
     public void setId(Long id) {
         this.id = id;

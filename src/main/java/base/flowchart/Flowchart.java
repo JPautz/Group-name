@@ -1,6 +1,7 @@
 package base.flowchart;
 
 import base.year.Year;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,15 @@ public class Flowchart {
 
     public Flowchart(String name) {
         this.name = name;
-        this.years = new ArrayList<Year>();
+        this.years = new ArrayList<>();
+        initializeYears();
+    }
+
+    public void initializeYears() {
+        this.years.add(new Year("Freshman", false));
+        this.years.add(new Year("Sophomore", false));
+        this.years.add(new Year("Junior", false));
+        this.years.add(new Year("Senior", false));
     }
 
     public Long getId() {

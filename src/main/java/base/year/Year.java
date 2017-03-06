@@ -1,6 +1,7 @@
 package base.year;
 
 import base.quarter.Quarter;
+import base.quarter.QuarterName;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,16 +15,23 @@ public class Year {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String date;
+    private String name;
     private boolean showSummer;
     private ArrayList<Quarter> quarters;
 
     public Year() {}
 
-    public Year(String date, boolean showSummer) {
-        this.date = date;
+    public Year(String name, boolean showSummer) {
+        this.name = name;
         this.showSummer = showSummer;
         this.quarters = new ArrayList<Quarter>();
+        initializeQuarters();
+    }
+
+    public void initializeQuarters() {
+        this.quarters.add(new Quarter(QuarterName.FALL));
+        this.quarters.add(new Quarter(QuarterName.WINTER));
+        this.quarters.add(new Quarter(QuarterName.SPRING));
     }
 
     public Long getId() {
@@ -34,11 +42,11 @@ public class Year {
         this.id = id;
     }
 
-    public String getDate() { return date; }
+    public String getName() { return name; }
 
     public boolean getShowSummer() { return showSummer; }
 
-    public void setDate(String date) { this.date = date; }
+    public void setName(String date) { this.name = name; }
 
     public void setShowSummer(boolean showSummer) {
         this.showSummer =  showSummer;

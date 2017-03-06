@@ -24,7 +24,7 @@ public class YearController {
 
     @PostMapping
     public Year create(@RequestBody Year input) {
-        return yearRepository.save(new Year(input.getDate(), input.getShowSummer()));
+        return yearRepository.save(new Year(input.getName(), input.getShowSummer()));
     }
 
     @DeleteMapping("{id}")
@@ -36,7 +36,7 @@ public class YearController {
         if (year == null) {
             return null;
         } else {
-            year.setDate(input.getDate());
+            year.setName(input.getName());
             year.setShowSummer(input.getShowSummer());
             return yearRepository.save(year);
         }

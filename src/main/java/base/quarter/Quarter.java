@@ -19,8 +19,12 @@ public class Quarter {
 
     public Quarter(QuarterName quarter) {
         this.quarter = quarter;
-        this.courses = new ArrayList<Course>();
+        this.courses = new ArrayList<>();
+        initializeCourses();
     }
+
+    public void initializeCourses() {}
+
 
     public Long getId() {
         return id;
