@@ -19,7 +19,7 @@ public class Quarter {
 
     public Quarter(QuarterName quarter) {
         this.quarter = quarter;
-        this.courses = new ArrayList<>();
+        this.courses = new ArrayList<Course>();
         initializeCourses();
     }
 

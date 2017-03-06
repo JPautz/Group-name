@@ -20,7 +20,7 @@ public class Flowchart {
 
     public Flowchart(String name) {
         this.name = name;
-        this.years = new ArrayList<>();
+        this.years = new ArrayList<Year>();
         initializeYears();
     }
 
