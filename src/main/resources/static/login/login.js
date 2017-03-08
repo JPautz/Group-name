@@ -9,13 +9,13 @@ angular.module( 'sample.login', [
     templateUrl: 'login/login.html'
   });
 })
-.controller( 'LoginCtrl', function LoginController( $scope, $http, store, $state) {
+.controller( 'LoginCtrl', function LoginController($scope, $http, store, $state, $rootScope) {
 
   $scope.user = {};
 
   $scope.login = function() {
     $http({
-      url: 'http://localhost:8080/login',
+      url: $rootScope.server_root + 'login',
       method: 'POST',
       data: $scope.user,
       transformResponse: undefined

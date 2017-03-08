@@ -9,13 +9,13 @@ angular.module( 'sample.signup', [
     templateUrl: 'signup/signup.html'
   });
 })
-.controller( 'SignupCtrl', function SignupController( $scope, $http, store, $state) {
+.controller( 'SignupCtrl', function SignupController($scope, $http, store, $state, $rootScope) {
 
   $scope.user = {};
 
   $scope.createUser = function() {
     $http({
-      url: 'http://localhost:8080/user',
+      url: $rootScope.server_root + 'user',
       method: 'POST',
       data: $scope.user
     }).then(function(response) {
