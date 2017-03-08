@@ -1,8 +1,7 @@
 angular.module( 'sample.home', [
   'ui.router',
   'angular-storage',
-  'angular-jwt',
-  'angular-loadscript'
+  'angular-jwt'
 ])
 .config(function($stateProvider) {
   $stateProvider.state('home', {

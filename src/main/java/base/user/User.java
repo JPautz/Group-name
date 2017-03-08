@@ -41,10 +41,10 @@ public class User implements Serializable {
     private Long id;
 
     @NotEmpty(message = "First name is required.")
-    private String firstName;
+    private String firstname;
 
     @NotEmpty(message = "Last name is required.")
-    private String lastName;
+    private String lastname;
 
     @Email(message = "Please provide a valid email address.")
     @NotEmpty(message = "Email is required.")
@@ -58,8 +58,8 @@ public class User implements Serializable {
 
     public User(User user) {
         this.id = user.id;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
+        this.firstname = user.firstname;
+        this.lastname = user.lastname;
         this.email = user.email;
         this.password = user.password;
     }
@@ -80,20 +80,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstName) {
+        this.firstname = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastName) {
+        this.lastname = lastName;
     }
 
     public String getEmail() {
@@ -106,7 +106,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User [userid=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
+        return "User [userid=" + id + ", firstName=" + firstname + ", lastName=" + lastname + ", email="
                 + email + "]";
     }
 }

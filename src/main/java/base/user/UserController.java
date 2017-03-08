@@ -43,8 +43,8 @@ public class UserController  {
     public User create(@Valid @RequestBody User reqUser) {
         User user = new User();
         user.setEmail(reqUser.getEmail());
-        user.setFirstName(reqUser.getFirstName());
-        user.setLastName(reqUser.getLastName());
+        user.setFirstname(reqUser.getFirstname());
+        user.setLastname(reqUser.getLastname());
         user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
         return userRepository.save(user);
     }
@@ -62,8 +62,8 @@ public class UserController  {
             return null;
         } else {
             user.setEmail(reqUser.getEmail());
-            user.setFirstName(reqUser.getFirstName());
-            user.setLastName(reqUser.getLastName());
+            user.setFirstname(reqUser.getFirstname());
+            user.setLastname(reqUser.getLastname());
             user.setEmail(reqUser.getEmail());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
             return userRepository.save(user);

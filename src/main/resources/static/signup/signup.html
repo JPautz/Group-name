@@ -2,17 +2,21 @@
 <div class="signup center-block jumbotron">
   <form role="form">
   <h1>Signup</h1>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="password" class="form-control" id="firstname" ng-model="user.firstname" placeholder="Firstname">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="password" class="form-control" id="lastname" ng-model="user.lastname" placeholder="Lastname">
+    </div>
   <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id="username" ng-model="user.username" placeholder="Username">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email" ng-model="user.email" placeholder="Username">
   </div>
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password" ng-model="user.password" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="extra">Extra</label>
-    <input type="text" class="form-control" id="extra" ng-model="user.extra" placeholder="Extra Information">
   </div>
   <button type="submit" class="btn btn-default" ng-click="createUser()">Submit</button>
 </form>

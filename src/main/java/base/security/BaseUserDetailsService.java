@@ -40,7 +40,7 @@ public class BaseUserDetailsService implements UserDetailsService {
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             // The GrantedAuthorities, aka Roles, should be stored along with the User in the DB. This is for Demo purposes.
-            return AuthorityUtils.createAuthorityList(this.getFirstName().equals("admin") ? "ROLE_ADMIN" : "ROLE_USER");
+            return AuthorityUtils.createAuthorityList(this.getFirstname().equals("admin") ? "ROLE_ADMIN" : "ROLE_USER");
         }
 
         @Override

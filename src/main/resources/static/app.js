@@ -3,7 +3,8 @@ angular.module( 'sample', [
   'sample.login',
   'sample.signup',
   'angular-jwt',
-  'angular-storage'
+  'angular-storage',
+  'angular-loadscript'
 ])
 .config( function myAppConfig ($urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
   $urlRouterProvider.otherwise('/');
