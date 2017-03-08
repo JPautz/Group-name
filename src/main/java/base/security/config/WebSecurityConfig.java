@@ -34,21 +34,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler) // Custom exception handler. Used to return 401s.
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .headers().cacheControl();        // disable page caching
+            .headers().cacheControl();        // disable page caching
 
         http
             .authorizeRequests()
-                // allow anonymous resource requests
-                .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/assets/**").permitAll()
-                .antMatchers(HttpMethod.POST, authPath).permitAll() // to get auth token
-                .antMatchers(HttpMethod.POST, "/user").permitAll() // to get auth token
-                .anyRequest().authenticated();
-
-        // Custom JWT based security filter -- Check for JWT tokens
-        http
+                .antMatchers("/**").permitAll()
+                .antMatchers(HttpMethod.POST, authPath).permitAll()
+                .antMatchers(HttpMethod.POST, "/user").permitAll()
+                .anyRequest().authenticated()
+                .and()
             .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
