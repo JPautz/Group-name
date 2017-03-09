@@ -62,4 +62,6 @@ public class Quarter {
     public void setYear(Year year) {
         this.year = year;
     }
+
+    public Year getYear() { return this.year; }
 }

@@ -67,4 +67,6 @@ public class Flowchart {
     public void removeYear(Year year) {
         years.remove(year.getId());
     }
+
+    public Student getStudent() { return this.student; }
 }

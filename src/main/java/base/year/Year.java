@@ -70,4 +70,6 @@ public class Year {
     public void removeQuarter(Quarter quarter) {
         quarters.remove(quarter.getId());
     }
+
+    public Flowchart getFlowchart() { return this.flowchart; }
 }
