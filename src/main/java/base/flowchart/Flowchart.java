@@ -1,8 +1,7 @@
 package base.flowchart;
 
-import base.student.Student;
+import base.user.User;
 import base.year.Year;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,16 +15,16 @@ public class Flowchart {
     private Long id;
     private String name;
     @ManyToOne(fetch=FetchType.LAZY)
-    private Student student;
+    private User user;
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flowchart")
     private List<Year> years;
 
     public Flowchart() {}
 
-    public Flowchart(String name, Student student) {
+    public Flowchart(String name, User user) {
         this.name = name;
         this.years = new ArrayList<Year>();
-        this.student = student;
+        this.user = user;
         initializeYears();
     }
 
@@ -44,8 +43,8 @@ public class Flowchart {
         this.id = id;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -68,5 +67,5 @@ public class Flowchart {
         years.remove(year.getId());
     }
 
-    public Student getStudent() { return this.student; }
+    public User getUser() { return this.user; }
 }

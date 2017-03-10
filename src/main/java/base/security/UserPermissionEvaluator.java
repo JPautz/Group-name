@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 @Component
-public class StudentPermissionEvaluator implements PermissionEvaluator {
+public class UserPermissionEvaluator implements PermissionEvaluator {
 
 
     @Override

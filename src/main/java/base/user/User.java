@@ -15,12 +15,15 @@
  */
 package base.user;
 
+import base.flowchart.Flowchart;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a user in our system.
@@ -54,6 +57,11 @@ public class User implements Serializable {
     @NotEmpty(message = "Password is required.")
     private String password;
 
+    private String token;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Flowchart> flowcharts;
+
     public User() {}
 
     public User(User user) {
@@ -62,6 +70,17 @@ public class User implements Serializable {
         this.lastname = user.lastname;
         this.email = user.email;
         this.password = user.password;
+        this.token = user.token;
+        this.flowcharts = new ArrayList<Flowchart>();
+        initializeFlowcharts();
+    }
+
+    public void initializeFlowcharts() {
+        for (int i = 0; i < 5; i++) {
+            String name = "Flowchart ";
+            name += Integer.toString(i + 1);
+            this.flowcharts.add(new Flowchart(name, this));
+        }
     }
 
     public String getPassword() {
@@ -103,6 +122,16 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public List<Flowchart> getFlowcharts() { return flowcharts; }
 
     @Override
     public String toString() {

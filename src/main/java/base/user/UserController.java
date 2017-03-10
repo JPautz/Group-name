@@ -1,14 +1,8 @@
 package base.user;
 
-import base.course.Course;
 import base.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +24,11 @@ public class UserController  {
         return currentUser;
     }
 
+    @GetMapping("{id}")
+    public User find(@PathVariable long id) {
+        return userRepository.findOne(id);
+    }
+
     @RequestMapping("/all")
     public List<User> getUsers(@CurrentUser UserDetails currentUser) {
         ArrayList<User> users = new ArrayList<>();
@@ -46,6 +45,7 @@ public class UserController  {
         user.setFirstname(reqUser.getFirstname());
         user.setLastname(reqUser.getLastname());
         user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
+        user.setToken(reqUser.getToken());
         return userRepository.save(user);
     }
 
@@ -66,6 +66,7 @@ public class UserController  {
             user.setLastname(reqUser.getLastname());
             user.setEmail(reqUser.getEmail());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
+            user.setToken(reqUser.getToken());
             return userRepository.save(user);
         }
     }

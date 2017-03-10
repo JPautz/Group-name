@@ -20,7 +20,7 @@ public class YearPermissionEvaluator implements PermissionEvaluator {
             return true;
 
         //needs to be implemented to get the User for a given student; fix later
-        return ((User) authentication.getPrincipal()).getId().equals(year.getFlowchart().getStudent());
+        return ((User) authentication.getPrincipal()).getId().equals(year.getFlowchart().getUser());
     }
 
     @Override

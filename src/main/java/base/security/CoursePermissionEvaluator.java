@@ -22,7 +22,8 @@ public class CoursePermissionEvaluator implements PermissionEvaluator {
             return true;
         }
         User currentUser = (User) authentication.getPrincipal();
-        return currentUser.getId().equals(course.getQuarter().getYear().getFlowchart().getStudent().getId());
+        return currentUser.getId().equals(course.getQuarter().getYear().getFlowchart().getUser().getId());
+
     }
 
     @Override

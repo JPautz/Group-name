@@ -22,7 +22,7 @@ public class CatalogPermissionEvaluator implements PermissionEvaluator {
             return true;
         }
         User currentUser = (User) authentication.getPrincipal();
-        return currentUser.getId().equals(catalog.getStudent().getId());
+        return currentUser.getId().equals(catalog.getUser().getId());
     }
 
     @Override

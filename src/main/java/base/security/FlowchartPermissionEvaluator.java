@@ -22,7 +22,7 @@ public class FlowchartPermissionEvaluator implements PermissionEvaluator {
             return true;
         }
         User currentUser = (User) authentication.getPrincipal();
-        return currentUser.getId().equals(flowchart.getStudent().getId());
+        return currentUser.getId().equals(flowchart.getUser().getId());
     }
 
     @Override
