@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="angular-dragula-demo">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <div class='wrapper'>
+      <div class='container' dragula='"first-bag"'>
+        <div>You can move these elements between these two containers</div>
+        <div>Moving them anywhere else isn't quite possible</div>
+        <div>There's also the possibility of moving elements around in the same container, changing their position</div>
+      </div>
+      <div class='container' dragula='"first-bag"'>
+        <div>This is the default use case. You only need to specify the containers you want to use</div>
+        <div>More interactive use cases lie ahead</div>
+        <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a></div>
+      </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <script src="https://rawgit.com/bevacqua/angular-dragula/master/dist/angular-dragula.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+
+</html>

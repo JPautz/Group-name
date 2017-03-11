@@ -3,8 +3,7 @@ angular.module( 'sample', [
   'sample.login',
   'sample.signup',
   'angular-jwt',
-  'angular-storage',
-  'angular-loadscript'
+  'angular-storage'
 ])
 .run(function($rootScope) {
     $rootScope.server_root = 'http://localhost:8080/';
