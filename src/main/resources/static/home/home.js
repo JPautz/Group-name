@@ -19,7 +19,6 @@ angular.module('sample.home', [
         .primaryPalette('green');
 })
 .controller('HomeCtrl', function HomeController($scope, $http, store, jwtHelper, $mdSidenav, $log) {
-
     $scope.jwt = store.get('jwt');
     $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
 

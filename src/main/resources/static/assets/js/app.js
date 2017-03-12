@@ -36,4 +36,13 @@ angular.module( 'sample', [
       $scope.pageTitle = nextRoute.$$route.pageTitle + ' | ngEurope Sample' ;
     }
   });
+
+  this.tags = [];
+
+  this.newChip = function(chip) {
+      return {
+          name: chip,
+          type: 'unknown'
+      };
+  };
 });

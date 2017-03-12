@@ -1,15 +1,36 @@
-<md-content>
-    <md-toolbar class="md-hue-2">
-        <div class="md-toolbar-tools">
-            <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button" id="hamburger">
-                <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
-            </md-button>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button" id="hamburger">
+            <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
+        </md-button>
+        <h2 flex md-truncate>Mustang Manager</h2>
+        <md-button ng-click="logout()" class="md-primary" id="logout">Logout</md-button>
+    </div>
+</md-toolbar>
 
-            <h2 flex md-truncate>Mustang Manager</h2>
-
-            <md-button ng-click="logout()" class="md-primary" id="logout">Logout</md-button>
-        </div>
-    </md-toolbar>
+<md-content layout="row" layout-align="space-around">
+    <md-card id="searchCard">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Course Search</span>
+                <md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="center">
+            <md-button ng-click="" class="md-primary">Search</md-button>
+        </md-card-actions>
+    </md-card>
+    <md-card id="infoCard">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Course Info</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+        </md-card-content>
+    </md-card>
 </md-content>
 
 <div id="left" dragula='"first-bag"'>
