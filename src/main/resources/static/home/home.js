@@ -18,7 +18,7 @@ angular.module('sample.home', [
     $mdThemingProvider.theme('default')
         .primaryPalette('green');
 })
-.controller('HomeCtrl', function HomeController($scope, $http, store, jwtHelper, $mdSidenav, $log) {
+.controller('HomeCtrl', function HomeController($scope, $http, store, jwtHelper, $mdSidenav, $log, $mdBottomSheet) {
     $scope.jwt = store.get('jwt');
     $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
 
