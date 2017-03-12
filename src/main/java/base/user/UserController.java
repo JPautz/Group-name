@@ -2,6 +2,8 @@ package base.user;
 
 import base.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,7 +41,7 @@ public class UserController  {
     }
 
     @PostMapping
-    public User create(@Valid @RequestBody User reqUser) {
+    public ResponseEntity<User> create(@Valid @RequestBody User reqUser) {
         if (userRepository.findByEmail(reqUser.getEmail()) == null) {
             User user = new User();
             user.setEmail(reqUser.getEmail());
@@ -47,10 +49,11 @@ public class UserController  {
             user.setLastname(reqUser.getLastname());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
             user.setToken(reqUser.getToken());
-            return userRepository.save(user);
+            userRepository.save(user);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
         }
         else {
-            return null;
+            return new ResponseEntity<User>(HttpStatus.CONFLICT);
         }
     }
 
