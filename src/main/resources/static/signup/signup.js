@@ -1,6 +1,7 @@
 angular.module( 'sample.signup', [
   'ui.router',
-  'angular-storage'
+  'angular-storage',
+  'ngMaterial'
 ])
 .config(function($stateProvider) {
   $stateProvider.state('signup', {

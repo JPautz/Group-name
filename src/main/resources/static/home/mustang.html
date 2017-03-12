@@ -1,7 +1,16 @@
-<header id="header">
-    <md-button ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-primary" id="hamburger">☰ Mustang Manager</md-button>
-    <md-button ng-click="logout()" class="md-primary" id="logout">Logout</md-button>
-</header>
+<md-content>
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button" id="hamburger">
+                <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
+            </md-button>
+
+            <h2 flex md-truncate>Mustang Manager</h2>
+
+            <md-button ng-click="logout()" class="md-primary" id="logout">Logout</md-button>
+        </div>
+    </md-toolbar>
+</md-content>
 
 <div id="left" dragula='"first-bag"'>
     <div class="card">

@@ -1,15 +1,22 @@
-<div class="login jumbotron center-block">
-  <h1>Login</h1>
-  <form role="form">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" ng-model="user.username" id="username" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" ng-model="user.password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-default" ng-click="login()">Submit</button>
-</form>
-<a ui-sref="signup()">Click here to Signup</a>
-</div>
+<md-content>
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2 flex md-truncate>Login</h2>
+        </div>
+    </md-toolbar>
+</md-content>
+<br>
+<md-content>
+  <md-input-container class="md-icon-float">
+    <input ng-model="user.username" type="email" placeholder="Email" ng-required="true">
+  </md-input-container>
+</md-content>
+<md-content>
+    <md-input-container class="md-icon-float">
+        <input ng-model="user.password" type="password" placeholder="Password" ng-required="true">
+    </md-input-container>
+</md-content>
+<md-content>
+    <md-button ng-click="login()" class="md-primary">Login</md-button>
+    <md-button ui-sref="signup()" class="md-primary">Sign Up</md-button>
+</md-content>
