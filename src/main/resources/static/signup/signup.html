@@ -7,7 +7,7 @@
     <md-card id="signupCard">
         <md-card-content>
             <md-input-container class="md-icon-float">
-                <input ng-model="user.firstname" type="name" placeholder="First Name (required)" ng-required="true" ng-keyup="$event.keyCode == 13 && createUser()">
+                <input ng-model="user.firstname" type="name" placeholder="First Name (required)" ng-required="true" ng-keyup="$event.keyCode == 13 && createUser()" autofocus>
             </md-input-container>
             <md-input-container class="md-icon-float">
                 <input ng-model="user.lastname" type="name" placeholder="Last Name (required)" ng-required="true" ng-keyup="$event.keyCode == 13 && createUser()">
