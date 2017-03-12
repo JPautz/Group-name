@@ -7,7 +7,7 @@
     <md-card id="loginCard">
         <md-card-content>
             <md-input-container class="md-block">
-                <input ng-model="user.username" type="email" placeholder="Email" ng-required="true" ng-keyup="$event.keyCode == 13 && login()">
+                <input ng-model="user.username" type="email" placeholder="Email" ng-required="true" ng-keyup="$event.keyCode == 13 && login()" autofocus>
             </md-input-container>
             <md-input-container class="md-block">
                 <input ng-model="user.password" type="password" placeholder="Password" ng-required="true" ng-keyup="$event.keyCode == 13 && login()">

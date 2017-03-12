@@ -27,4 +27,13 @@ angular.module( 'sample.signup', [
     });
   }
 
+})
+.directive('autofocus', function($timeout) {
+  return {
+      link: function(scope, element, attrs) {
+          $timeout(function() {
+              element.focus();
+          });
+      }
+  }
 });
