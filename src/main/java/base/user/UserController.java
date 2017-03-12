@@ -40,13 +40,18 @@ public class UserController  {
 
     @PostMapping
     public User create(@Valid @RequestBody User reqUser) {
-        User user = new User();
-        user.setEmail(reqUser.getEmail());
-        user.setFirstname(reqUser.getFirstname());
-        user.setLastname(reqUser.getLastname());
-        user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
-        user.setToken(reqUser.getToken());
-        return userRepository.save(user);
+        if (userRepository.findByEmail(reqUser.getEmail()) == null) {
+            User user = new User();
+            user.setEmail(reqUser.getEmail());
+            user.setFirstname(reqUser.getFirstname());
+            user.setLastname(reqUser.getLastname());
+            user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
+            user.setToken(reqUser.getToken());
+            return userRepository.save(user);
+        }
+        else {
+            return null;
+        }
     }
 
     @DeleteMapping("{id}")
