@@ -1,16 +1,7 @@
 <header id="header">
-    <nav>
-        <a href="#menu">Mustang Manager</a>
-    </nav>
+    <md-button ng-click="toggleLeft()" ng-hide="isOpenRight()" class="md-primary" id="hamburger">☰ Mustang Manager</md-button>
 </header>
-<div id="background"></div>
-<nav id="menu">
-    <ul class="links">
-        <li><a href="">Test 1</a></li>
-        <li><a href="">Test 2</a></li>
-        <li><a href="">Test 3</a></li>
-    </ul>
-</nav>
+
 <!--<div id="search">
 </div><div id="info">
 </div>-->
@@ -35,3 +26,20 @@
         </div>
     </div>
 </div>
+
+<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    </md-toolbar>
+    <md-content ng-controller="LeftCtrl" layout-padding="">
+        <form>
+            <md-input-container>
+                <label for="testInput">Test input</label>
+                <input type="text" id="testInput" ng-model="data" md-autofocus="">
+            </md-input-container>
+        </form>
+        <md-button ng-click="close()" class="md-primary">
+            Close Sidenav Left
+        </md-button>
+    </md-content>
+</md-sidenav>
