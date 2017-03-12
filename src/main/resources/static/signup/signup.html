@@ -1,28 +1,27 @@
-<md-content>
-    <md-toolbar class="md-hue-2">
-        <div class="md-toolbar-tools">
-            <h2 flex md-truncate>Sign Up</h2>
-        </div>
-    </md-toolbar>
-</md-content>
-<br>
-<md-content>
-    <md-input-container class="md-icon-float">
-        <input ng-model="user.firstname" type="name" placeholder="First Name (required)" ng-required="true">
-    </md-input-container>
-    <md-input-container class="md-icon-float">
-        <input ng-model="user.lastname" type="name" placeholder="Last Name (required)" ng-required="true">
-    </md-input-container>
-</md-content>
-<md-content>
-    <md-input-container class="md-icon-float">
-        <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
-    </md-input-container>
-    <md-input-container class="md-icon-float">
-        <input ng-model="user.password" type="password" placeholder="Password (required)" ng-required="true">
-    </md-input-container>
-</md-content>
-<md-content>
-    <md-button ng-click="createUser()" class="md-primary" id="login">Submit</md-button>
-    <md-button ui-sref="login()" class="md-primary" id="signup">Back</md-button>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <h2 flex md-truncate>Sign Up</h2>
+    </div>
+</md-toolbar>
+<md-content layout="row" layout-align="center">
+    <md-card id="signupCard">
+        <md-card-content>
+            <md-input-container class="md-icon-float">
+                <input ng-model="user.firstname" type="name" placeholder="First Name (required)" ng-required="true">
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <input ng-model="user.lastname" type="name" placeholder="Last Name (required)" ng-required="true">
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <input ng-model="user.password" type="password" placeholder="Password (required)" ng-required="true">
+            </md-input-container>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="space-around">
+            <md-button ng-click="createUser()" class="md-primary">Submit</md-button>
+            <md-button ui-sref="login()" class="md-primary">Back</md-button>
+        </md-card-actions>
+    </md-card>
 </md-content>

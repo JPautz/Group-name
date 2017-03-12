@@ -1,4 +1,4 @@
-angular.module( 'sample.home', [
+angular.module('sample.home', [
     'ui.router',
     'angular-storage',
     'angular-jwt',
@@ -9,7 +9,7 @@ angular.module( 'sample.home', [
     $stateProvider.state('home', {
         url: '/',
         controller: 'HomeCtrl',
-    templateUrl: 'home/mustang.html',
+    templateUrl: 'home/home.html',
         data: {
             requiresLogin: true
         }
