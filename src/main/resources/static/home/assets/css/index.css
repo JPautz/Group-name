@@ -3,12 +3,16 @@ body {
     text-align: center;
 }
 
-#hamburger {
+#hamburger, #logout {
     color: #FFFFFF;
     margin: 0px;
     height: 100%;
     padding-left: 12px;
     padding-right: 12px;
+}
+
+#logout {
+    float: right;
 }
 
 .center {
