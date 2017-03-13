@@ -1,7 +1,7 @@
 package base.quarter;
 
 import base.course.Course;
-import base.year.Year;
+import base.flowchart.Flowchart;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,23 +14,14 @@ public class Quarter {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private QuarterName quarter;
-    @ManyToOne(fetch=FetchType.LAZY)
-    private Year year;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "quarters")
-    private List<Course> courses;
+    @ManyToOne(fetch=FetchType.EAGER)
+    private Flowchart flowchart;
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "quarters")
+    private List<Course> courses = new ArrayList<Course>();
 
     public Quarter() {}
 
-    public Quarter(QuarterName quarter, Year year) {
-        this.quarter = quarter;
-        this.courses = new ArrayList<Course>();
-        this.year = year;
-        initializeCourses();
-    }
-
-    public void initializeCourses() {}
-
-
+    // Getters
     public Long getId() {
         return id;
     }
@@ -43,14 +34,7 @@ public class Quarter {
         return courses;
     }
 
-    public void addCourse(Course course) {
-        courses.add(course);
-    }
-
-    public void removeCourse(Course course) {
-        courses.remove(course.getId());
-    }
-
+    // Setters
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,9 +43,16 @@ public class Quarter {
         this.quarter = quarter;
     }
 
-    public void setYear(Year year) {
-        this.year = year;
+    public void setFlowchart(Flowchart flowchart) {
+        this.flowchart = flowchart;
     }
 
-    public Year getYear() { return this.year; }
+    // Courses
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+    }
 }

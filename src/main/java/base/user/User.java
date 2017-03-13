@@ -57,85 +57,71 @@ public class User implements Serializable {
     @NotEmpty(message = "Password is required.")
     private String password;
 
-    private String token;
-
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Flowchart> flowcharts;
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
 
     public User() {}
 
     public User(User user) {
-        this.id = user.id;
-        this.firstname = user.firstname;
-        this.lastname = user.lastname;
-        this.email = user.email;
-        this.password = user.password;
-        this.token = user.token;
-        this.flowcharts = new ArrayList<Flowchart>();
-        initializeFlowcharts();
-    }
-
-    public void initializeFlowcharts() {
-        for (int i = 0; i < 5; i++) {
-            String name = "Flowchart ";
-            name += Integer.toString(i + 1);
-            this.flowcharts.add(new Flowchart(name, this));
-        }
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        this.firstname = user.getFirstname();
+        this.lastname = user.getLastname();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.flowcharts = user.getFlowcharts();
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    // Getters
     public String getFirstname() {
         return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Flowchart> getFlowcharts() { return flowcharts; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Setters
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getToken() {
-        return token;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setFlowcharts(List<Flowchart> flowcharts) { this.flowcharts = flowcharts; }
+
+    // Flowchart
+    public void addFlowchart(Flowchart flowchart) {
+        flowcharts.add(flowchart);
     }
 
-    public List<Flowchart> getFlowcharts() { return flowcharts; }
-
-    @Override
-    public String toString() {
-        return "User [userid=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email="
-                + email + "]";
+    public void removeFlowchart(Flowchart flowchart) {
+        flowcharts.remove(flowchart);
     }
 }

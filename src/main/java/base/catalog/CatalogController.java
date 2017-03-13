@@ -35,6 +35,19 @@ public class CatalogController {
         return catalogRepository.save(new Catalog());
     }
 
+    /*@PostMapping("/newCourse")
+    public Course newCourse(@RequestBody Course input) {
+        Course course = new Course(input.getPrefix(), input.getNumber(), input.getTitle(),
+                input.getUnits(), input.getPrerequisites(), input.getDescription(), input.getTermsOffered());
+
+        ArrayList<Catalog> catalogs = new ArrayList<>();
+        catalogRepository.findAll().forEach(catalog -> catalogs.add(catalog));
+        catalogs.get(0).addCourse(course);
+        catalogRepository.save(catalogs.get(0));
+
+        return course;
+    }*/
+
     @PutMapping
     public Catalog addCourse(@RequestBody Course add) {
         ArrayList<Catalog> catalogs = new ArrayList<>();

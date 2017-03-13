@@ -12,93 +12,84 @@ public class Course {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String prefix;
-    private String number;
+    private String name;
     private String title;
 
     private int units;
     private String prerequisites;
+    @Lob
+    @Column
     private String description;
     private String termsOffered;
-    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Quarter> quarters;
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<Quarter> quarters = new ArrayList<Quarter>();
 
     public Course() {}
 
-    public Course(String prefix, String number, String title, int units, String prerequisites, String description,
-                  String termsOffered, Quarter quarter) {
-        this.prefix = prefix;
-        this.number = number;
-        this.title = title;
-        this.description = description;
-        this.units = units;
-        this.prerequisites = prerequisites;
-        this.termsOffered = termsOffered;
-        this.quarters = new ArrayList<Quarter>();
-        this.quarters.add(quarter);
-    }
-
+    // Getters
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+    public String getName() {
+        return name;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getUnits() {
         return units;
-    }
-
-    public void setUnits(int units) {
-        this.units = units;
     }
 
     public String getPrerequisites() {
         return prerequisites;
     }
 
-    public void setPrerequisites(String prerequisites) {
-        this.prerequisites = prerequisites;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getTermsOffered() {
         return termsOffered;
     }
 
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
+
+    public void setPrerequisites(String prerequisites) {
+        this.prerequisites = prerequisites;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setTermsOffered(String termsOffered) {
         this.termsOffered = termsOffered;
+    }
+
+    // Quarters
+    public void addQuarter(Quarter quarter) {
+        quarters.add(quarter);
+    }
+
+    public void removeQuarter(Quarter quarter) {
+        quarters.remove(quarter);
     }
 }

@@ -1,7 +1,10 @@
 package base.flowchart;
 
-import base.year.Year;
+import base.security.CurrentUser;
+import base.user.User;
+import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,6 +12,9 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/flowchart")
 public class FlowchartController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private FlowchartRepository flowchartRepository;
@@ -25,10 +31,18 @@ public class FlowchartController {
         return flowchartRepository.findOne(id);
     }
 
-    /*@PostMapping
-    public Flowchart create(@RequestBody Flowchart input) {
-        return flowchartRepository.save(new Flowchart(input.getName()));
-    }*/
+    @PostMapping
+    public Flowchart create(@CurrentUser UserDetails curUser, @RequestBody Flowchart input) {
+        Flowchart flowchart = new Flowchart();
+        flowchart.setName(input.getName());
+
+        User user = userRepository.findByEmail(curUser.getUsername());
+        flowchart.setUser(user);
+
+        user.addFlowchart(flowchart);
+
+        return flowchartRepository.save(flowchart);
+    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
@@ -38,18 +52,11 @@ public class FlowchartController {
     @PutMapping("{id}")
     public Flowchart update(@PathVariable Long id, @RequestBody Flowchart input) {
         Flowchart flowchart = flowchartRepository.findOne(id);
-        ArrayList<Year> years;
         if(flowchart == null) {
             return null;
         }
         else {
             flowchart.setName(input.getName());
-            for(int i = 0; i < flowchart.getYears().size(); i++) {
-                flowchart.removeYear(flowchart.getYears().get(i));
-            }
-            for(int i = 0; i < input.getYears().size(); i++) {
-                flowchart.addYear(input.getYears().get(i));
-            }
             return flowchartRepository.save(flowchart);
         }
     }

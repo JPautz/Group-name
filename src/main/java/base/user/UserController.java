@@ -48,7 +48,6 @@ public class UserController  {
             user.setFirstname(reqUser.getFirstname());
             user.setLastname(reqUser.getLastname());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
-            user.setToken(reqUser.getToken());
             userRepository.save(user);
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
@@ -74,7 +73,6 @@ public class UserController  {
             user.setLastname(reqUser.getLastname());
             user.setEmail(reqUser.getEmail());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
-            user.setToken(reqUser.getToken());
             return userRepository.save(user);
         }
     }

@@ -30,17 +30,11 @@ public class Catalog {
     }
 
     public void addCourse(Course c) {
-        String prefix = c.getPrefix();
-        String title = c.getTitle();
-        String s = title.concat(" "+ prefix);
-        courseCatalog.put(s, c);
+        courseCatalog.put(c.getName(), c);
     }
 
     public void removeCourse(Course c) {
-        String prefix = c.getPrefix();
-        String title = c.getTitle();
-        String s = title.concat(" "+ prefix);
-        courseCatalog.remove(s);
+        courseCatalog.remove(c.getName());
     }
 
     public void removeKey(String param) {

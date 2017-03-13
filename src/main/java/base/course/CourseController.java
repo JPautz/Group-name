@@ -1,6 +1,16 @@
 package base.course;
 
+import base.catalog.Catalog;
+import base.catalog.CatalogRepository;
+import base.flowchart.Flowchart;
+import base.flowchart.FlowchartRepository;
+import base.quarter.Quarter;
+import base.quarter.QuarterRepository;
+import base.security.CurrentUser;
+import base.user.User;
+import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,6 +18,15 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/course")
 public class CourseController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private FlowchartRepository flowchartRepository;
+
+    @Autowired
+    private QuarterRepository quarterRepository;
 
     @Autowired
     private CourseRepository courseRepository;
@@ -24,11 +43,18 @@ public class CourseController {
         return courseRepository.findOne(id);
     }
 
-    /*@PostMapping
+    @PostMapping
     public Course create(@RequestBody Course input) {
-        return courseRepository.save(new Course(input.getPrefix(), input.getNumber(), input.getTitle(),
-                input.getUnits(), input.getPrerequisites(), input.getDescription(), input.getTermsOffered()));
-    }*/
+        Course course = new Course();
+        course.setName(input.getName());
+        course.setTitle(input.getTitle());
+        course.setUnits(input.getUnits());
+        course.setPrerequisites(input.getPrerequisites());
+        course.setDescription(input.getDescription());
+        course.setTermsOffered(input.getTermsOffered());
+
+        return courseRepository.save(course);
+    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
@@ -41,8 +67,7 @@ public class CourseController {
         if (course == null) {
             return null;
         } else {
-            course.setNumber(input.getNumber());
-            course.setPrefix(input.getPrefix());
+            course.setName(input.getName());
             course.setTitle(input.getTitle());
             course.setUnits(input.getUnits());
             course.setPrerequisites(input.getPrerequisites());

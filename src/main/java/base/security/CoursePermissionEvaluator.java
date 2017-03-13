@@ -14,7 +14,7 @@ public class CoursePermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication,
                                  Object targetDomainObject, Object permission) {
-        if(authentication == null) {
+        /*if(authentication == null) {
             return false;
         }
         Course course = (Course) targetDomainObject;
@@ -22,7 +22,7 @@ public class CoursePermissionEvaluator implements PermissionEvaluator {
             return true;
         }
         User currentUser = (User) authentication.getPrincipal();
-        //return currentUser.getId().equals(course.getQuarter().getYear().getFlowchart().getUser().getId());
+        //return currentUser.getId().equals(course.getQuarter().getYear().getFlowchart().getUser().getId());*/
         return true;
     }
 
