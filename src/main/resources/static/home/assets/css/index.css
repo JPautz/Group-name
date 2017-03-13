@@ -59,7 +59,7 @@ body {
     height: 300px;
 }
 
-#hamburger, #logout {
+#hamburger, #logout, #title, #closeNav {
     color: #FFFFFF;
 }
 
