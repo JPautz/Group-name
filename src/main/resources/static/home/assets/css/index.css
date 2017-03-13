@@ -41,11 +41,14 @@ body {
           0 5px 24px 4px rgba(0, 0, 0, 0.12);
 
     height: 75%;
+    width: 50%;
+    min-width: 600px;
     overflow: auto;
 }
 
 .faq-dialog-content {
-    min-width: 1000px;
+    width: 100%;
+    min-width: 600px;
 }
 
 #loginCard, #signupCard {
