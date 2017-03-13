@@ -33,15 +33,19 @@ public class FlowchartController {
 
     @PostMapping
     public Flowchart create(@CurrentUser UserDetails curUser, @RequestBody Flowchart input) {
-        Flowchart flowchart = new Flowchart();
-        flowchart.setName(input.getName());
-
         User user = userRepository.findByEmail(curUser.getUsername());
-        flowchart.setUser(user);
+        if (user != null) {
+            Flowchart flowchart = new Flowchart();
+            flowchart.setName(input.getName());
 
-        user.addFlowchart(flowchart);
+            flowchart.setUser(user);
 
-        return flowchartRepository.save(flowchart);
+            user.addFlowchart(flowchart);
+
+            return flowchartRepository.save(flowchart);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping("{id}")

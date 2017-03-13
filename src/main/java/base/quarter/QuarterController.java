@@ -43,16 +43,20 @@ public class QuarterController {
 
     @PostMapping
     public Quarter create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
-        Quarter quarter = new Quarter();
-        quarter.setQuarter(input.getQuarter());
-
         User user = userRepository.findByEmail(curUser.getUsername());
-        Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-        quarter.setFlowchart(flowchart);
+        if (user != null) {
+            Quarter quarter = new Quarter();
+            quarter.setQuarter(input.getQuarter());
 
-        flowchart.addQuarter(quarter);
+            Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
+            quarter.setFlowchart(flowchart);
 
-        return quarterRepository.save(quarter);
+            flowchart.addQuarter(quarter);
+
+            return quarterRepository.save(quarter);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping("{id}")
