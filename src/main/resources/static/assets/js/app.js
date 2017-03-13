@@ -5,12 +5,12 @@ angular.module( 'sample', [
   'angular-jwt',
   'angular-storage'
 ])
-/*.run(function($rootScope) {
-    $rootScope.server_root = 'http://localhost:8080/';
-})*/
 .run(function($rootScope) {
-    $rootScope.server_root = 'https://cp-groupname.herokuapp.com/';
+    $rootScope.server_root = 'http://localhost:8080/';
 })
+/*.run(function($rootScope) {
+    $rootScope.server_root = 'https://cp-groupname.herokuapp.com/';
+})*/
 .config( function myAppConfig ($urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
   $urlRouterProvider.otherwise('/');
 
