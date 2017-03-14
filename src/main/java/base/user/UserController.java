@@ -20,10 +20,11 @@ public class UserController  {
     @Autowired
     private UserRepository userRepository;
 
-    // Return only logged in user
     @GetMapping
-    public UserDetails getCurrentUser(@CurrentUser UserDetails currentUser) {
-        return currentUser;
+    public User getCurUser(@CurrentUser UserDetails curUser) {
+        User user = userRepository.findByEmail(curUser.getUsername());
+
+        return user;
     }
 
     @GetMapping("{id}")

@@ -1,6 +1,8 @@
 package base.flowchart;
 
+import base.course.Course;
 import base.quarter.Quarter;
+import base.quarter.QuarterName;
 import base.user.User;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Entity
 public class Flowchart {
+
+    private static final int NUM_Q = 12;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,7 +23,27 @@ public class Flowchart {
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "flowchart")
     private List<Quarter> quarters = new ArrayList<Quarter>();
 
-    public Flowchart() {}
+    public Flowchart() {
+        for (int curQ = 0; curQ < NUM_Q; ++curQ) {
+            Quarter quarter = new Quarter();
+            quarter.setQuarter(QuarterName.values()[curQ % (QuarterName.values().length - 1)]);
+            quarter.setFlowchart(this);
+            quarters.add(quarter);
+
+            if (curQ == 0) {
+                Course course = new Course();
+                course.setName("CPE308");
+                course.setTitle("Software Engineering I");
+                course.setUnits(4);
+                course.setPrerequisites("CPE/CSC 357; and CSC 141 or CSC 348");
+                course.setDescription("Principles for engineering requirements analysis and design of large complex software systems. Software process models. Methods of project planning, tracking, documentation, communication, and quality assurance. Analysis of engineering tradeoffs. Group laboratory project. Technical oral and written presentations. 3 lectures, 1 laboratory.");
+                course.setTermsOffered("F, W");
+                course.addQuarter(quarter);
+
+                quarter.getCourses().add(course);
+            }
+        }
+    }
 
     // Getters
     public Long getId() {
@@ -58,5 +82,15 @@ public class Flowchart {
 
     public void removeQuarter(Quarter quarter) {
         quarters.remove(quarter);
+    }
+
+    public boolean ownsQuarter(Quarter quarter) {
+        for (Quarter q : quarters) {
+            if (q.getId() == quarter.getId()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

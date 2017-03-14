@@ -35,7 +35,12 @@ public class User implements Serializable {
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
 
-    public User() {}
+    public User() {
+        Flowchart flowchart = new Flowchart();
+        flowchart.setName("Flowchart 1");
+        flowchart.setUser(this);
+        flowcharts.add(flowchart);
+    }
 
     public User(User user) {
         this.firstname = user.getFirstname();

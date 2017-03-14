@@ -75,16 +75,39 @@ public class QuarterController {
         }
     }
 
-    @PutMapping("/addCourse")
-    public Quarter addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input) {
+    @PutMapping("/deleteCourse/{id}")
+    public Quarter deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
         User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-        Quarter quarter = quarterRepository.findByFlowchart(flowchart).get(0);
-        Course course = courseRepository.findByName(input.getName());
+        Quarter quarter = quarterRepository.findOne(id);
 
-        quarter.addCourse(course);
-        course.addQuarter(quarter);
+        if (flowchart.ownsQuarter(quarter)) {
+            Course course = courseRepository.findByName(input.getName());
 
-        return quarterRepository.save(quarter);
+            quarter.removeCourse(course);
+            course.removeQuarter(quarter);
+
+            return quarterRepository.save(quarter);
+        } else {
+            return null;
+        }
+    }
+
+    @PutMapping("/addCourse/{id}")
+    public Quarter addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
+        User user = userRepository.findByEmail(curUser.getUsername());
+        Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
+        Quarter quarter = quarterRepository.findOne(id);
+
+        if (flowchart.ownsQuarter(quarter)) {
+            Course course = courseRepository.findByName(input.getName());
+
+            quarter.addCourse(course);
+            course.addQuarter(quarter);
+
+            return quarterRepository.save(quarter);
+        } else {
+            return null;
+        }
     }
 }
