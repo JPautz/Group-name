@@ -32,7 +32,7 @@ public class User implements Serializable {
     @NotEmpty(message = "Password is required.")
     private String password;
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
 
     public User() {

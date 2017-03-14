@@ -18,9 +18,9 @@ public class Flowchart {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private User user;
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "flowchart")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "flowchart")
     private List<Quarter> quarters = new ArrayList<Quarter>();
 
     public Flowchart() {
@@ -29,19 +29,6 @@ public class Flowchart {
             quarter.setQuarter(QuarterName.values()[curQ % (QuarterName.values().length - 1)]);
             quarter.setFlowchart(this);
             quarters.add(quarter);
-
-            /*if (curQ == 0) {
-                Course course = new Course();
-                course.setName("CPE308");
-                course.setTitle("Software Engineering I");
-                course.setUnits(4);
-                course.setPrerequisites("CPE/CSC 357; and CSC 141 or CSC 348");
-                course.setDescription("Principles for engineering requirements analysis and design of large complex software systems. Software process models. Methods of project planning, tracking, documentation, communication, and quality assurance. Analysis of engineering tradeoffs. Group laboratory project. Technical oral and written presentations. 3 lectures, 1 laboratory.");
-                course.setTermsOffered("F, W");
-                course.addQuarter(quarter);
-
-                quarter.getCourses().add(course);
-            }*/
         }
     }
 

@@ -14,9 +14,9 @@ public class Quarter {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private QuarterName quarter;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private Flowchart flowchart;
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "quarters")
+    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "quarters")
     private List<Course> courses = new ArrayList<Course>();
 
     public Quarter() {}
