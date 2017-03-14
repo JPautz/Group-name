@@ -110,6 +110,9 @@ angular.module('sample.home', [
     dragulaService.options($scope, 'quarter-bag', {
         copy: function (el, source) {
             return source.className.split(' ')[0] == 'searchSpace';
+        },
+        accepts: function(el, source) {
+            return source.className.split(' ')[0] != 'searchSpace';
         }
     });
 
