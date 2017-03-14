@@ -19,7 +19,7 @@ angular.module('sample.home', [
         .primaryPalette('green');
 })
 .controller('HomeCtrl', function HomeController($scope, $http, store, jwtHelper, $mdSidenav, $log, $mdBottomSheet,
-        $timeout, $rootScope) {
+        $timeout, $rootScope, dragulaService) {
     $scope.jwt = store.get('jwt');
     $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
 
@@ -106,6 +106,12 @@ angular.module('sample.home', [
             console.log(error);
         });
       };
+
+    dragulaService.options($scope, 'quarter-bag', {
+        copy: function (el, source) {
+            return source.className.split(' ')[0] == 'searchSpace';
+        }
+    });
 
     $scope.$on('quarter-bag.drop', function (e, el, target, source) {
         var courseId = el[0].className.split(" ")[0];
