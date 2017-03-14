@@ -17,8 +17,6 @@ public class Course {
 
     private int units;
     private String prerequisites;
-    @Lob
-    @Column
     private String description;
     private String termsOffered;
     @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
