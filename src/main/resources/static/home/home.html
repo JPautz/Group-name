@@ -13,13 +13,26 @@
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">Course Search</span>
-                <md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>
+                <md-input-container class="md-block">
+                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'" ng-keyup="$event.keyCode == 13 && search()" autofocus>
+                </md-input-container>
+                <!--<md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>-->
             </md-card-title-text>
         </md-card-title>
-        <md-card-content class="searchSpace"> <!--dragula='"first-bag"'-->
+        <md-card-content ng-show="id >= 0" class="searchSpace" dragula='"quarter-bag"'>
+            <div class="{{id}} {{name}}">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{name}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>{{units}}</p>
+                    </div>
+                </div>
+            </div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="center">
-            <md-button ng-click="" class="md-primary">Search</md-button>
+            <md-button ng-click="search()" class="md-primary">Search</md-button>
         </md-card-actions>
     </md-card>
     <md-card id="infoCard">
@@ -29,6 +42,10 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
+            <h2>{{name}} {{title}} {{units}}</h2>
+            <p>{{termsOffered}}</p>
+            <p>{{prerequisites}}</p>
+            <p>{{description}}</p>
         </md-card-content>
     </md-card>
 </md-content>

@@ -88,6 +88,25 @@ angular.module('sample.home', [
         };
     }
 
+    $scope.search = function() {
+        $http({
+            url: $rootScope.server_root + 'course/search',
+            method: 'POST',
+            data: {
+                'name': $scope.query
+            }
+        }).then(function(response) {
+            $scope.id = response.data.id;
+            $scope.name = response.data.name;
+            $scope.title = response.data.title;
+            $scope.units = response.data.units + ' units';
+            $scope.termsOffered = response.data.termsOffered;
+            $scope.prerequisites = response.data.prerequisites;
+        }, function(error) {
+            console.log(error);
+        });
+      };
+
     $scope.$on('quarter-bag.drop', function (e, el, target, source) {
         var courseId = el[0].className.split(" ")[0];
         var courseName = el[0].className.split(" ")[1];
@@ -104,20 +123,22 @@ angular.module('sample.home', [
                 'name': courseName
             }
         }).then(function(response) {
-            $http({
-                url: $rootScope.server_root + 'quarter/deleteCourse/' + sourceId,
-                method: 'PUT',
-                headers: {
-                    'X-Auth-Token': $scope.jwt
-                },
-                data: {
-                    'name': courseName
-                }
-            }).then(function(response) {
+            if (!isNaN(sourceId)) {
+                $http({
+                    url: $rootScope.server_root + 'quarter/deleteCourse/' + sourceId,
+                    method: 'PUT',
+                    headers: {
+                        'X-Auth-Token': $scope.jwt
+                    },
+                    data: {
+                        'name': courseName
+                    }
+                }).then(function(response) {
 
-            }, function(error) {
-                console.log(error);
-            });
+                }, function(error) {
+                    console.log(error);
+                });
+            }
         }, function(error) {
             console.log(error);
         });
@@ -140,4 +161,13 @@ angular.module('sample.home', [
         restrict: "E",
         templateUrl: 'home/card.tmpl.html'
     };
+})
+.directive('autofocus', function($timeout) {
+  return {
+      link: function(scope, element, attrs) {
+          $timeout(function() {
+              element.focus();
+          });
+      }
+  }
 });
