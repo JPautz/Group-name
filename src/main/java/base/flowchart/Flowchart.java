@@ -30,7 +30,7 @@ public class Flowchart {
             quarter.setFlowchart(this);
             quarters.add(quarter);
 
-            if (curQ == 0) {
+            /*if (curQ == 0) {
                 Course course = new Course();
                 course.setName("CPE308");
                 course.setTitle("Software Engineering I");
@@ -41,7 +41,7 @@ public class Flowchart {
                 course.addQuarter(quarter);
 
                 quarter.getCourses().add(course);
-            }
+            }*/
         }
     }
 
