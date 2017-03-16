@@ -21,7 +21,7 @@ __Mustang Manager__
 
 ##4.	Architecture
 
-![UML deployment diagram](http://i.imgur.com/riwnsQg.png)
+![UML deployment diagram](https://github.com/cpe308-309/Group-name/blob/wiki/Images/DeploymentDiagram.png)
 
 ##5.	Technologies
 
@@ -34,10 +34,7 @@ __Serverside__
 __Clientside__
 * HTML5 local JWT storage
 * AngularJS
-* Various AngularJS libraries
-*   AngularJS-Dragula
-*   Angular Material
-*   UI-Router
+* Various AngularJS libraries including AngularJS-Dragula, Angular Material, and UI-Router
 
 __Database__
 * PostgreSQL
