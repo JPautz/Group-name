@@ -7,18 +7,17 @@ To provide the students of Cal Poly SLO a flowcharting tool that will help them 
 
 ##2.	List of features
 
-__Software Name__
-* Table representation of planned courses
-* Filter by GE Area
-* Method of showing prequisites
-* Course availability by term
-* List showing courses that need to be taken
-* Dragging mechanism to drop courses into table
+__Mustang Manager__
+* Authorization
+* Flowchart Management
+* Course Logistics
 
 ##3.	Requirements
 
-* To simplify the course planning process as much as possible.
-* Let the user to be able to know how many courses he/she has left to take and to be able to let the user intuitively plan their academic career.
+* Simplistic, but pleasing user interface conforming to Google's design standards
+* Easy to learn
+* Persistent data
+* Responsive and seamless
 
 ##4.	Architecture
 
@@ -28,12 +27,20 @@ __Software Name__
 
 __Serverside__
 * Java
+*   Spring frameork
+*   JPA
+* RESTful API-centric
 
 __Clientside__
-* Javascript
+* HTML5 local JWT storage
+* AngularJS
+* Various AngularJS libraries
+*   AngularJS-Dragula
+*   Angular Material
+*   UI-Router
 
 __Database__
-* MySQL
+* PostgreSQL
 
 ##6.	Project Breakdown, Timeline and Milestones
 
@@ -52,15 +59,14 @@ __Design and Initial Development Completion__
 * Understanding of the technologies and libraries that are to be used.
 
 __Implementation Completion__
-* Projected date: //2017
+* Projected date: 6/9/2017
 * Implementation of the specification.
 
 __Testing and Integration Completion__
-* Projected date: //2017
+* Projected date: TBD
 * Evaluation of implementation.
 
 
 ##7.	Risks and Uncertainties
 
 * Information that we might need would not be available. For instance, we do not currently have access to the information PolyPlanner or PASS uses.
-* The intuivity of our user interface.
