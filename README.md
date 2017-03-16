@@ -1,29 +1,29 @@
 # Flowcharting Tool
 __Group Name__
 
-# 1. Description
+## 1. Description
 
 To provide the students of Cal Poly SLO a flowcharting tool that will help them plan their academic careers.
 
-# 2.	List of features
+## 2.	List of features
 
 __Mustang Manager__
 * Authorization
 * Flowchart Management
 * Course Logistics
 
-# 3.	Requirements
+## 3.	Requirements
 
 * Simplistic, but pleasing user interface conforming to Google's design standards
 * Easy to learn
 * Persistent data
 * Responsive and seamless
 
-# 4.	Architecture
+## 4.	Architecture
 
 ![UML deployment diagram](https://github.com/cpe308-309/Group-name/blob/wiki/Images/DeploymentDiagram.png)
 
-# 5.	Technologies
+## 5.	Technologies
 
 __Serverside__
 * Java
@@ -39,7 +39,7 @@ __Clientside__
 __Database__
 * PostgreSQL
 
-# 6.	Project Breakdown, Timeline and Milestones
+## 6.	Project Breakdown, Timeline and Milestones
 
 __Initial Planning Completion__
 * Projected date: 1/22/2017
@@ -64,6 +64,6 @@ __Testing and Integration Completion__
 * Evaluation of implementation.
 
 
-# 7.	Risks and Uncertainties
+## 7.	Risks and Uncertainties
 
 * Information that we might need would not be available. For instance, we do not currently have access to the information PolyPlanner or PASS uses.
