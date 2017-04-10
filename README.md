@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cpe308-309/Group-name.svg?branch=master)](https://travis-ci.org/cpe308-309/Group-name)
+
 # Flowcharting Tool
 __Group Name__
 
