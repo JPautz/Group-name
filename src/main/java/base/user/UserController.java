@@ -50,6 +50,7 @@ public class UserController  {
             user.setLastname(reqUser.getLastname());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
             userRepository.save(user);
+
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
         else {
