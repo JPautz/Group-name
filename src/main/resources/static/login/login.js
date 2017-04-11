@@ -10,11 +10,12 @@ angular.module( 'sample.login', [
     templateUrl: 'login/login.html'
   });
 })
-.controller( 'LoginCtrl', function LoginController($scope, $http, store, $state, $rootScope) {
+.controller( 'LoginCtrl', function LoginController($scope, $http, store, $state, $rootScope, $mdDialog) {
 
   $scope.user = {};
 
   $scope.login = function() {
+    var errorText;
     $http({
       url: $rootScope.server_root + 'login',
       method: 'POST',
@@ -25,6 +26,26 @@ angular.module( 'sample.login', [
       $state.go('home');
     }, function(error) {
       console.log(error);
+      if(error.status == 401) {
+        errorText = 'Please check to make sure all fields were filled in correctly.';
+      } else {
+        errorText = 'An Error occurred logging in, please try again. Error code ' + error.status;
+      }
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Unable to Login')
+          .textContent(errorText.toString())
+          .ok('Okay')
+          .openFrom({
+            top: -50,
+            width: 30,
+            height: 80
+          })
+          .closeTo({
+            left: 1500
+          })
+      );
     });
   }
 

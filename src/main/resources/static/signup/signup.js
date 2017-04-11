@@ -24,12 +24,13 @@ angular.module( 'sample.signup', [
       store.set('jwt', response.data.id_token);
       $state.go('home');
     }, function(error) {
+      console.log(error);
       if(error.status == 409) {
         errorText = 'This Email address is already registered.';
       } else if(error.status == 400) {
         errorText = 'Please check to make sure all required fields were filled in correctly.';
       } else {
-        errorText = 'Sorry, there was an error in creating your account.'
+        errorText = 'Sorry, there was an error in creating your account. Error code ' + error.status;
       }
       $mdDialog.show(
         $mdDialog.alert()
