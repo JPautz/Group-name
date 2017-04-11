@@ -8,6 +8,8 @@ import base.security.CurrentUser;
 import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,7 +78,7 @@ public class QuarterController {
     }
 
     @PutMapping("/deleteCourse/{id}")
-    public Quarter deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
+    public ResponseEntity<Quarter> deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
         User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
         Quarter quarter = quarterRepository.findOne(id);
@@ -87,14 +89,16 @@ public class QuarterController {
             quarter.removeCourse(course);
             course.removeQuarter(quarter);
 
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
         }
     }
 
     @PutMapping("/addCourse/{id}")
-    public Quarter addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
+    public ResponseEntity<Quarter> addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
         User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
         Quarter quarter = quarterRepository.findOne(id);
@@ -105,9 +109,11 @@ public class QuarterController {
             quarter.addCourse(course);
             course.addQuarter(quarter);
 
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
         }
     }
 }
