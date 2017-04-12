@@ -44,7 +44,7 @@ public class QuarterController {
     }
 
     @PostMapping
-    public Quarter create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
+    public ResponseEntity<Quarter> create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
         User user = userRepository.findByEmail(curUser.getUsername());
         if (user != null) {
             Quarter quarter = new Quarter();
@@ -55,9 +55,11 @@ public class QuarterController {
 
             flowchart.addQuarter(quarter);
 
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -67,13 +69,16 @@ public class QuarterController {
     }
 
     @PutMapping("{id}")
-    public Quarter update(@PathVariable Long id, @RequestBody Quarter input) {
+    public ResponseEntity<Quarter> update(@PathVariable Long id, @RequestBody Quarter input) {
         Quarter quarter = quarterRepository.findOne(id);
         if (quarter == null) {
-            return null;
+
+            return new ResponseEntity<Quarter>(HttpStatus.NOT_FOUND);
         } else {
             quarter.setQuarter(input.getQuarter());
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
         }
     }
 
