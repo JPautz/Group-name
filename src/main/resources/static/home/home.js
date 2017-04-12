@@ -159,6 +159,7 @@ angular.module('sample.home', [
         $mdSidenav('left').close();
     };
 })
+
 .directive('quarter', function () {
     return {
         restrict: "E",
