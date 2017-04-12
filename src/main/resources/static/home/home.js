@@ -19,7 +19,7 @@ angular.module('sample.home', [
         .primaryPalette('green');
 })
 .controller('HomeCtrl', function HomeController($scope, $http, store, jwtHelper, $mdSidenav, $log, $mdBottomSheet,
-        $timeout, $rootScope, dragulaService) {
+        $timeout, $rootScope, $mdDialog, dragulaService) {
     $scope.jwt = store.get('jwt');
     $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
 
@@ -27,6 +27,7 @@ angular.module('sample.home', [
     $scope.quarterArr = [];
 
     $scope.getContent = function() {
+        var errorText;
         $http({
             url: $rootScope.server_root + 'user',
             method: 'GET',
@@ -38,6 +39,26 @@ angular.module('sample.home', [
             $scope.quarterArr = response.data.flowcharts[0].quarters;
         }, function(error) {
             console.log(error);
+            if(error.status == 500) {
+              errorText = 'An Error occurred getting user information, make sure you are logged in.';
+            } else {
+              errorText = 'An Error occurred getting user information, please reload the page or try logging in again. Error code ' + error.status;
+            }
+            $mdDialog.show(
+              $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title('Error Retrieving Data')
+                .textContent(errorText.toString())
+                .ok('Okay')
+                .openFrom({
+                  top: -50,
+                  width: 30,
+                  height: 80
+                })
+                .closeTo({
+                  left: 1500
+                })
+            );
         });
     };
 
@@ -121,6 +142,7 @@ angular.module('sample.home', [
         var courseName = el[0].className.split(" ")[1];
         var sourceId = source[0].className.split(" ")[1];
         var targetId = target[0].className.split(" ")[1];
+        var errorText;
 
         $http({
             url: $rootScope.server_root + 'quarter/addCourse/' + targetId,
@@ -146,10 +168,50 @@ angular.module('sample.home', [
 
                 }, function(error) {
                     console.log(error);
+                    if(error.status == 401) {
+                      errorText = 'Please assure you are properly authenticated by logging in again.';
+                    } else {
+                      errorText = 'An Error occurred moving course, please try again. Error code ' + error.status;
+                    }
+                    $mdDialog.show(
+                      $mdDialog.alert()
+                        .clickOutsideToClose(true)
+                        .title('Unable to Move Course')
+                        .textContent(errorText.toString())
+                        .ok('Okay')
+                        .openFrom({
+                          top: -50,
+                          width: 30,
+                          height: 80
+                        })
+                        .closeTo({
+                          left: 1500
+                        })
+                    );
                 });
             }
         }, function(error) {
             console.log(error);
+            if(error.status == 401) {
+              errorText = 'Please assure you are properly authenticated by logging in again.';
+            } else {
+              errorText = 'An Error occurred moving course, please try again. Error code ' + error.status;
+            }
+            $mdDialog.show(
+              $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title('Unable to Move Course')
+                .textContent(errorText.toString())
+                .ok('Okay')
+                .openFrom({
+                  top: -50,
+                  width: 30,
+                  height: 80
+                })
+                .closeTo({
+                  left: 1500
+                })
+            );
         });
     });
 })
