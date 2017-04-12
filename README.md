@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/cpe308-309/Group-name.png?label=ready&title=Ready)](https://waffle.io/cpe308-309/Group-name)
 [![Build Status](https://travis-ci.org/cpe308-309/Group-name.svg?branch=master)](https://travis-ci.org/cpe308-309/Group-name) [![Quality Gate](https://sonarqube.com/api/badges/gate?key=mustang.manager)](https://sonarqube.com/dashboard/index/mustang.manager)
 
 # Mustang Manager
