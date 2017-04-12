@@ -21,10 +21,15 @@ public class UserController  {
     private UserRepository userRepository;
 
     @GetMapping
-    public User getCurUser(@CurrentUser UserDetails curUser) {
-        User user = userRepository.findByEmail(curUser.getUsername());
+    public ResponseEntity<User> getCurUser(@CurrentUser UserDetails curUser) {
+        if(userRepository.findByEmail(curUser.getUsername()) != null) {
+            User user = userRepository.findByEmail(curUser.getUsername());
 
-        return user;
+            return new ResponseEntity<>(user, HttpStatus.OK);
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("{id}")
@@ -51,10 +56,10 @@ public class UserController  {
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
             userRepository.save(user);
 
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         else {
-            return new ResponseEntity<User>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
