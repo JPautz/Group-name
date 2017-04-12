@@ -20,30 +20,47 @@ public class UserController  {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    public User getCurUser(@CurrentUser UserDetails curUser) {
-        User user = userRepository.findByEmail(curUser.getUsername());
+    private boolean isAdmin(UserDetails curUser) {
+        return curUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    }
 
-        return user;
+    @GetMapping
+    public ArrayList<User> getCurUser(@CurrentUser UserDetails curUser) {
+        ArrayList<User> users = new ArrayList<>();
+        if (isAdmin(curUser)) {
+            userRepository.findAll().forEach(users::add);
+        } else {
+            users.add(userRepository.findByEmail(curUser.getUsername()));
+        }
+        return users;
     }
 
     @GetMapping("{id}")
-    public User find(@PathVariable long id) {
-        return userRepository.findOne(id);
+    public User find(@PathVariable long id/*, @CurrentUser UserDetails curUser*/) {
+        User reqUser = userRepository.findOne(id);
+        return reqUser;
+        /*if (isAdmin(curUser)) {
+            return reqUser;
+        } else if (reqUser.getEmail().equals(curUser.getUsername())) {
+            return reqUser;
+        }
+        return null;*/
     }
 
-    @RequestMapping("/all")
+    //method is redundant
+    /*@RequestMapping("/all")
     public List<User> getUsers(@CurrentUser UserDetails currentUser) {
         ArrayList<User> users = new ArrayList<>();
         if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             userRepository.findAll().forEach(users::add);
         }
         return users;
-    }
+    }*/
 
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody User reqUser) {
         if (userRepository.findByEmail(reqUser.getEmail()) == null) {
+            // create user
             User user = new User();
             user.setEmail(reqUser.getEmail());
             user.setFirstname(reqUser.getFirstname());
@@ -53,28 +70,34 @@ public class UserController  {
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
         else {
+            // email already taken
             return new ResponseEntity<User>(HttpStatus.CONFLICT);
         }
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        // ADMIN Route
-        userRepository.delete(id);
+    public void delete(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        if (isAdmin(curUser))
+            userRepository.delete(id);
     }
 
     @PutMapping("{id}")
-    public User update(@PathVariable Long id, @RequestBody User reqUser) {
-        User user = userRepository.findOne(id);
-        if (user == null) {
+    public User update(@PathVariable Long id, @RequestBody User newUser, @CurrentUser UserDetails curUser) {
+        User reqUser = userRepository.findOne(id);
+        if (reqUser == null) {
+            //user not found
             return null;
+        } else if (reqUser.getEmail().equals(curUser.getUsername())) {
+            reqUser.setEmail(newUser.getEmail());
+            reqUser.setFirstname(newUser.getFirstname());
+            reqUser.setLastname(newUser.getLastname());
+            reqUser.setEmail(newUser.getEmail());
+            reqUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
+            User x = userRepository.save(reqUser);
+            System.out.println(curUser.getUsername());
+            return x;
         } else {
-            user.setEmail(reqUser.getEmail());
-            user.setFirstname(reqUser.getFirstname());
-            user.setLastname(reqUser.getLastname());
-            user.setEmail(reqUser.getEmail());
-            user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
-            return userRepository.save(user);
+            return null;
         }
     }
 }
