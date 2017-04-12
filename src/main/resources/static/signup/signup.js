@@ -10,11 +10,12 @@ angular.module( 'sample.signup', [
     templateUrl: 'signup/signup.html'
   });
 })
-.controller( 'SignupCtrl', function SignupController($scope, $http, store, $state, $rootScope) {
+.controller( 'SignupCtrl', function SignupController($scope, $http, store, $state, $rootScope, $mdDialog) {
 
   $scope.user = {};
 
   $scope.createUser = function() {
+    var errorText;
     $http({
       url: $rootScope.server_root + 'user',
       method: 'POST',
@@ -23,7 +24,29 @@ angular.module( 'sample.signup', [
       store.set('jwt', response.data.id_token);
       $state.go('home');
     }, function(error) {
-      alert(error.data);
+      console.log(error);
+      if(error.status == 409) {
+        errorText = 'This Email address is already registered.';
+      } else if(error.status == 400) {
+        errorText = 'Please check to make sure all required fields were filled in correctly.';
+      } else {
+        errorText = 'Sorry, there was an error in creating your account. Error code ' + error.status;
+      }
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Account Creation Error')
+          .textContent(errorText.toString())
+          .ok('Okay')
+          .openFrom({
+            top: -50,
+            width: 30,
+            height: 80
+          })
+          .closeTo({
+            left: 1500
+          })
+      );
     });
   }
 

@@ -32,7 +32,7 @@ angular.module( 'sample', [
     }
   });
 })
-.controller('AppCtrl', function AppCtrl ($scope, $location, $mdPanel, $mdBottomSheet) {
+.controller('AppCtrl', function AppCtrl ($scope, $location, $mdPanel, $mdBottomSheet, $http, $rootScope) {
   $scope.$on('$routeChangeSuccess', function(e, nextRoute){
     if ( nextRoute.$$route && angular.isDefined( nextRoute.$$route.pageTitle ) ) {
       $scope.pageTitle = nextRoute.$$route.pageTitle + ' | ngEurope Sample' ;
@@ -46,6 +46,20 @@ angular.module( 'sample', [
           name: chip,
           type: 'unknown'
       };
+  };
+
+  this.search = function() {
+    $http({
+        url: $rootScope.server_root + 'course/search',
+        method: 'POST',
+        data: {
+            'name': this.tags[0]
+        }
+    }).then(function(response) {
+        console.log(response.data);
+    }, function(error) {
+        console.log(error);
+    });
   };
 
   this._mdPanel = $mdPanel;

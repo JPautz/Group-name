@@ -38,6 +38,11 @@ public class CourseController {
         return courses;
     }
 
+    @PostMapping("search")
+    public Course findCourse(@RequestBody Course input) {
+        return courseRepository.findByName(input.getName());
+    }
+
     @GetMapping("{id}")
     public Course find(@PathVariable Long id) {
         return courseRepository.findOne(id);

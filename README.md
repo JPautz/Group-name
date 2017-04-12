@@ -1,41 +1,47 @@
+[![Build Status](https://travis-ci.org/cpe308-309/Group-name.svg?branch=master)](https://travis-ci.org/cpe308-309/Group-name)
+
 # Flowcharting Tool
 __Group Name__
 
-##1. Description
+## 1. Description
 
 To provide the students of Cal Poly SLO a flowcharting tool that will help them plan their academic careers.
 
-##2.	List of features
+## 2.	List of features
 
-__Software Name__
-* Table representation of planned courses
-* Filter by GE Area
-* Method of showing prequisites
-* Course availability by term
-* List showing courses that need to be taken
-* Dragging mechanism to drop courses into table
+__Mustang Manager__
+* Authorization
+* Flowchart Management
+* Course Logistics
 
-##3.	Requirements
+## 3.	Requirements
 
-* To simplify the course planning process as much as possible.
-* Let the user to be able to know how many courses he/she has left to take and to be able to let the user intuitively plan their academic career.
+* Simplistic, but pleasing user interface conforming to Google's design standards
+* Easy to learn
+* Persistent data
+* Responsive and seamless
 
-##4.	Architecture
+## 4.	Architecture
 
-![UML deployment diagram](http://i.imgur.com/riwnsQg.png)
+![UML deployment diagram](https://github.com/cpe308-309/Group-name/blob/wiki/Images/DeploymentDiagram.png)
 
-##5.	Technologies
+## 5.	Technologies
 
 __Serverside__
 * Java
+*   Spring frameork
+*   JPA
+* RESTful API-centric
 
 __Clientside__
-* Javascript
+* HTML5 local JWT storage
+* AngularJS
+* Various AngularJS libraries including AngularJS-Dragula, Angular Material, and UI-Router
 
 __Database__
-* MySQL
+* PostgreSQL
 
-##6.	Project Breakdown, Timeline and Milestones
+## 6.	Project Breakdown, Timeline and Milestones
 
 __Initial Planning Completion__
 * Projected date: 1/22/2017
@@ -47,20 +53,19 @@ __Specification Analysis Completion__
 * Transcribing the high-level thoughts in the planning phase into unambiguous requirements. 
 
 __Design and Initial Development Completion__
-* Projected date: //2017
+* Projected date: 3/17/2017
 * Understanding of the structure of the program.
 * Understanding of the technologies and libraries that are to be used.
 
 __Implementation Completion__
-* Projected date: //2017
+* Projected date: 6/9/2017
 * Implementation of the specification.
 
 __Testing and Integration Completion__
-* Projected date: //2017
+* Projected date: TBD
 * Evaluation of implementation.
 
 
-##7.	Risks and Uncertainties
+## 7.	Risks and Uncertainties
 
 * Information that we might need would not be available. For instance, we do not currently have access to the information PolyPlanner or PASS uses.
-* The intuivity of our user interface.

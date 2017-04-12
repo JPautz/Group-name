@@ -13,13 +13,26 @@
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">Course Search</span>
-                <md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>
+                <md-input-container class="md-block">
+                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'" ng-keyup="$event.keyCode == 13 && search()" autofocus>
+                </md-input-container>
+                <!--<md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>-->
             </md-card-title-text>
         </md-card-title>
-        <md-card-content class="searchSpace" dragula='"first-bag"'>
+        <md-card-content ng-show="id >= 0" class="searchSpace" dragula='"quarter-bag"'>
+            <div class="{{id}} {{name}}">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{name}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>{{units}}</p>
+                    </div>
+                </div>
+            </div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="center">
-            <md-button ng-click="" class="md-primary">Search</md-button>
+            <md-button ng-click="search()" class="md-primary">Search</md-button>
         </md-card-actions>
     </md-card>
     <md-card id="infoCard">
@@ -29,230 +42,17 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
+            <h2>{{name}} {{title}} {{units}}</h2>
+            <p>{{termsOffered}}</p>
+            <p>{{prerequisites}}</p>
+            <p>{{description}}</p>
         </md-card-content>
     </md-card>
 </md-content>
 
-<md-content layout="row" layout-align="center">
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Fall</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Winter</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Spring</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Fall</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Winter</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Spring</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Fall</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Winter</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Spring</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Fall</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Winter</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-    <md-card class="flowchartCard">
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Spring</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content class="flowchartSpace" dragula='"first-bag"'>
-            <div class="card">
-                <div class="card-header">
-                    <h3>CPE 101</h3>
-                </div>
-                <div class="card-body">
-                    <p>4 units</p>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
+<md-content id="flowchartHome" layout="row" layout-align="center">
+    <quarter ng-repeat="quarter in quarterArr"></quarter>
 </md-content>
-
-<!--<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
-    <md-toolbar class="md-theme-light">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
-    </md-toolbar>
-    <md-content ng-controller="LeftCtrl" layout-padding="" layout="column">
-        <md-button class="md-primary faq-dialog-open-button" ng-click="ctrl.showDialog($event)">
-            FAQ
-        </md-button>
-        <md-button ng-click="close()" class="md-primary">
-            Close Sidenav Left
-        </md-button>
-    </md-content>
-</md-sidenav>-->
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
     <md-toolbar ng-controller="LeftCtrl" class="md-theme-light">

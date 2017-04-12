@@ -8,6 +8,8 @@ import base.security.CurrentUser;
 import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,16 +45,20 @@ public class QuarterController {
 
     @PostMapping
     public Quarter create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
-        Quarter quarter = new Quarter();
-        quarter.setQuarter(input.getQuarter());
-
         User user = userRepository.findByEmail(curUser.getUsername());
-        Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-        quarter.setFlowchart(flowchart);
+        if (user != null) {
+            Quarter quarter = new Quarter();
+            quarter.setQuarter(input.getQuarter());
 
-        flowchart.addQuarter(quarter);
+            Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
+            quarter.setFlowchart(flowchart);
 
-        return quarterRepository.save(quarter);
+            flowchart.addQuarter(quarter);
+
+            return quarterRepository.save(quarter);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping("{id}")
@@ -71,16 +77,43 @@ public class QuarterController {
         }
     }
 
-    @PutMapping("/addCourse")
-    public Quarter addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input) {
+    @PutMapping("/deleteCourse/{id}")
+    public ResponseEntity<Quarter> deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
         User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-        Quarter quarter = quarterRepository.findByFlowchart(flowchart).get(0);
-        Course course = courseRepository.findByName(input.getName());
+        Quarter quarter = quarterRepository.findOne(id);
 
-        quarter.addCourse(course);
-        course.addQuarter(quarter);
+        if (flowchart.ownsQuarter(quarter)) {
+            Course course = courseRepository.findByName(input.getName());
 
-        return quarterRepository.save(quarter);
+            quarter.removeCourse(course);
+            course.removeQuarter(quarter);
+
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PutMapping("/addCourse/{id}")
+    public ResponseEntity<Quarter> addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
+        User user = userRepository.findByEmail(curUser.getUsername());
+        Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
+        Quarter quarter = quarterRepository.findOne(id);
+
+        if (flowchart.ownsQuarter(quarter)) {
+            Course course = courseRepository.findByName(input.getName());
+
+            quarter.addCourse(course);
+            course.addQuarter(quarter);
+
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
+        }
     }
 }
