@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cpe308-309/Group-name.svg?branch=master)](https://travis-ci.org/cpe308-309/Group-name)
+[![Build Status](https://travis-ci.org/cpe308-309/Group-name.svg?branch=master)](https://travis-ci.org/cpe308-309/Group-name) [![Quality Gate](https://sonarqube.com/api/badges/gate?key=mustang.manager)](https://sonarqube.com/dashboard/index/mustang.manager)
 
 # Flowcharting Tool
 __Group Name__
