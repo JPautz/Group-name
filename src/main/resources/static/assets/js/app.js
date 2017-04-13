@@ -53,10 +53,6 @@ angular.module('sample', [
                 data: {
                     'name': this.tags[0]
                 }
-            }).then(function (response) {
-                console.log(response.data);
-            }, function (error) {
-                console.log(error);
             });
         };
 

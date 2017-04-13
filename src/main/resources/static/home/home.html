@@ -52,9 +52,19 @@
     </md-card>
 </md-content>
 
-<md-content id="flowchartHome" layout="row" layout-align="center">
-    <quarter ng-repeat="quarter in quarterArr"></quarter>
-</md-content>
+
+<div >
+    <md-content id="flowchartHome">
+        <md-grid-list
+                md-cols-xs="2" md-cols-sm="4" md-cols-md="8" md-cols-gt-md="12"
+                md-row-height-gt-md="1:1" md-row-height="2:2">
+
+            <md-grid-tile md-rowspan="0" md-colspan="0" ng-repeat="quarter in quarterArr">
+                <quarter></quarter>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-content>
+</div>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
     <md-toolbar ng-controller="LeftCtrl" class="md-theme-light">
