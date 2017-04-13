@@ -3,7 +3,6 @@ package base.user;
 import base.flowchart.Flowchart;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="users") // 'user' is a keyword in Postgres
+@Table(name = "users") // 'user' is a keyword in Postgres
 public class User implements Serializable {
 
     @Id
@@ -26,13 +25,13 @@ public class User implements Serializable {
 
     @Email(message = "Please provide a valid email address.")
     @NotEmpty(message = "Email is required.")
-    @Column(unique=true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotEmpty(message = "Password is required.")
     private String password;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
 
     public User() {
@@ -71,7 +70,9 @@ public class User implements Serializable {
         return password;
     }
 
-    public List<Flowchart> getFlowcharts() { return flowcharts; }
+    public List<Flowchart> getFlowcharts() {
+        return flowcharts;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -94,7 +95,9 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public void setFlowcharts(List<Flowchart> flowcharts) { this.flowcharts = flowcharts; }
+    public void setFlowcharts(List<Flowchart> flowcharts) {
+        this.flowcharts = flowcharts;
+    }
 
     // Flowchart
     public void addFlowchart(Flowchart flowchart) {

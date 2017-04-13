@@ -25,7 +25,7 @@ public class BaseUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Could not find user " + username);
         }
         return new BaseUserDetails(user);
@@ -50,7 +50,7 @@ public class BaseUserDetailsService implements UserDetailsService {
 
 
         /********************************************************************
-              Lets not worry about these for now. Hard code them to true.
+         Lets not worry about these for now. Hard code them to true.
          *******************************************************************/
         @Override
         public boolean isAccountNonExpired() {

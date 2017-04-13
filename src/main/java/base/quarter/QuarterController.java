@@ -57,9 +57,9 @@ public class QuarterController {
 
             quarterRepository.save(quarter);
 
-            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -73,12 +73,12 @@ public class QuarterController {
         Quarter quarter = quarterRepository.findOne(id);
         if (quarter == null) {
 
-            return new ResponseEntity<Quarter>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             quarter.setQuarter(input.getQuarter());
             quarterRepository.save(quarter);
 
-            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         }
     }
 
@@ -96,9 +96,9 @@ public class QuarterController {
 
             quarterRepository.save(quarter);
 
-            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -116,9 +116,9 @@ public class QuarterController {
 
             quarterRepository.save(quarter);
 
-            return new ResponseEntity<Quarter>(quarter, HttpStatus.OK);
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Quarter>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 }

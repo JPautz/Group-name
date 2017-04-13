@@ -1,6 +1,7 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
-        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button" id="hamburger">
+        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button"
+                   id="hamburger">
             <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
         </md-button>
         <h2 flex md-truncate id="title">Mustang Manager</h2>
@@ -14,7 +15,8 @@
             <md-card-title-text>
                 <span class="md-headline">Course Search</span>
                 <md-input-container class="md-block">
-                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'" ng-keyup="$event.keyCode == 13 && search()" autofocus>
+                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'"
+                           ng-keyup="$event.keyCode == 13 && search()" autofocus>
                 </md-input-container>
                 <!--<md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>-->
             </md-card-title-text>
@@ -51,7 +53,15 @@
 </md-content>
 
 <md-content id="flowchartHome" layout="row" layout-align="center">
-    <quarter ng-repeat="quarter in quarterArr"></quarter>
+    <md-grid-list
+            md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+            md-row-height-gt-md="1:1" md-row-height="2:2"
+            md-gutter="12px" md-gutter-gt-sm="8px">
+
+        <md-grid-tile md-rowspan="3" md-colspan="2" ng-repeat="quarter in quarterArr">
+            <quarter></quarter>
+        </md-grid-tile>
+    </md-grid-list>
 </md-content>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
@@ -65,15 +75,12 @@
     </md-toolbar>
     <md-content layout-padding="" layout="column">
 
-
-
-
-        <md-button class="md-primary faq-dialog-open-button" style="text-align:left"  aria-label="View Source"
-                   ng-class="{ active: demoCtrl.$showSource }" ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
-            Manage Flowcharts
-        </md-button>
-
         <md-menu ng-show="demoCtrl.$showSource" style="padding: 0px 10px">
+            <md-button class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source"
+                       ng-class="{ active: demoCtrl.$showSource }"
+                       ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
+                Manage Flowcharts
+            </md-button>
             <md-menu-content>
                 <md-menu-item>
                     <md-button>

@@ -11,15 +11,16 @@ import java.util.List;
 public class Quarter {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private QuarterName quarter;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Flowchart flowchart;
-    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "quarters")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "quarters")
     private List<Course> courses = new ArrayList<Course>();
 
-    public Quarter() {}
+    public Quarter() {
+    }
 
     // Getters
     public Long getId() {
