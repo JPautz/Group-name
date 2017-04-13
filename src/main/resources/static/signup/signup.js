@@ -24,7 +24,6 @@ angular.module('sample.signup', [
                 store.set('jwt', response.data.id_token);
                 $state.go('home');
             }, function (error) {
-                console.log(error);
                 if (error.status == 409) {
                     errorText = 'This Email address is already registered.';
                 } else if (error.status == 400) {
