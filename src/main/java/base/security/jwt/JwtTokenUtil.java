@@ -36,8 +36,8 @@ public class JwtTokenUtil implements Serializable {
     public String getUsernameFromToken(String token) {
         String username;
         final Claims claims = getClaimsFromToken(token);
-        if(claims != null) {
-            if(claims.getSubject() != null) {
+        if (claims != null) {
+            if (claims.getSubject() != null) {
                 username = claims.getSubject();
             } else {
                 username = null;
@@ -51,8 +51,8 @@ public class JwtTokenUtil implements Serializable {
     public Date getCreatedDateFromToken(String token) {
         Date created;
         final Claims claims = getClaimsFromToken(token);
-        if(claims != null) {
-            if(claims.get(CLAIM_KEY_CREATED) != null) {
+        if (claims != null) {
+            if (claims.get(CLAIM_KEY_CREATED) != null) {
                 created = new Date((Long) claims.get(CLAIM_KEY_CREATED));
             } else {
                 created = null;
@@ -66,8 +66,8 @@ public class JwtTokenUtil implements Serializable {
     public Date getExpirationDateFromToken(String token) {
         Date expiration;
         final Claims claims = getClaimsFromToken(token);
-        if(claims != null) {
-            if(claims.getExpiration() != null) {
+        if (claims != null) {
+            if (claims.getExpiration() != null) {
                 expiration = claims.getExpiration();
             } else {
                 expiration = null;
@@ -81,8 +81,8 @@ public class JwtTokenUtil implements Serializable {
     public String getAudienceFromToken(String token) {
         String audience;
         final Claims claims = getClaimsFromToken(token);
-        if(claims != null) {
-            if(claims.get(CLAIM_KEY_AUDIENCE) != null) {
+        if (claims != null) {
+            if (claims.get(CLAIM_KEY_AUDIENCE) != null) {
                 audience = (String) claims.get(CLAIM_KEY_AUDIENCE);
             } else {
                 audience = null;
@@ -161,7 +161,7 @@ public class JwtTokenUtil implements Serializable {
     public String refreshToken(String token) {
         String refreshedToken;
         final Claims claims = getClaimsFromToken(token);
-        if(claims != null) {
+        if (claims != null) {
             claims.put(CLAIM_KEY_CREATED, new Date());
             refreshedToken = generateToken(claims);
         } else {
