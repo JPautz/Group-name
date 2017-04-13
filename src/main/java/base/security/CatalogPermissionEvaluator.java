@@ -14,11 +14,11 @@ public class CatalogPermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication,
                                  Object targetDomainObject, Object permission) {
-        if(authentication == null) {
+        if (authentication == null) {
             return false;
         }
         Catalog catalog = (Catalog) targetDomainObject;
-        if(catalog == null) {
+        if (catalog == null) {
             return true;
         }
         User currentUser = (User) authentication.getPrincipal();
