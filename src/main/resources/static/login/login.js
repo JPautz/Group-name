@@ -25,7 +25,6 @@ angular.module('sample.login', [
                 store.set('jwt', response.data);
                 $state.go('home');
             }, function (error) {
-                console.log(error);
                 if (error.status == 401) {
                     errorText = 'Please check to make sure all fields were filled in correctly.';
                 } else {
