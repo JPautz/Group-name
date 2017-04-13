@@ -38,10 +38,7 @@ public class UserController {
     @GetMapping("{id}")
     public User find(@PathVariable long id, @CurrentUser UserDetails curUser) {
         User reqUser = userRepository.findOne(id);
-        //return reqUser;
-        if (isAdmin(curUser)) {
-            return reqUser;
-        } else if (reqUser.getEmail().equals(curUser.getUsername())) {
+        if (isAdmin(curUser) || reqUser.getEmail().equals(curUser.getUsername())) {
             return reqUser;
         }
         return null;
@@ -83,8 +80,7 @@ public class UserController {
             reqUser.setLastname(newUser.getLastname());
             reqUser.setEmail(newUser.getEmail());
             reqUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
-            User x = userRepository.save(reqUser);
-            return x;
+            return userRepository.save(reqUser);
         }
         return null;
     }
