@@ -35,10 +35,14 @@ public class JwtTokenUtil implements Serializable {
 
     public String getUsernameFromToken(String token) {
         String username;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch (Exception e) {
+        final Claims claims = getClaimsFromToken(token);
+        if(claims != null) {
+            if(claims.getSubject() != null) {
+                username = claims.getSubject();
+            } else {
+                username = null;
+            }
+        } else {
             username = null;
         }
         return username;
@@ -46,10 +50,14 @@ public class JwtTokenUtil implements Serializable {
 
     public Date getCreatedDateFromToken(String token) {
         Date created;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            created = new Date((Long) claims.get(CLAIM_KEY_CREATED));
-        } catch (Exception e) {
+        final Claims claims = getClaimsFromToken(token);
+        if(claims != null) {
+            if(claims.get(CLAIM_KEY_CREATED) != null) {
+                created = new Date((Long) claims.get(CLAIM_KEY_CREATED));
+            } else {
+                created = null;
+            }
+        } else {
             created = null;
         }
         return created;
@@ -57,10 +65,14 @@ public class JwtTokenUtil implements Serializable {
 
     public Date getExpirationDateFromToken(String token) {
         Date expiration;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            expiration = claims.getExpiration();
-        } catch (Exception e) {
+        final Claims claims = getClaimsFromToken(token);
+        if(claims != null) {
+            if(claims.getExpiration() != null) {
+                expiration = claims.getExpiration();
+            } else {
+                expiration = null;
+            }
+        } else {
             expiration = null;
         }
         return expiration;
@@ -68,10 +80,14 @@ public class JwtTokenUtil implements Serializable {
 
     public String getAudienceFromToken(String token) {
         String audience;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            audience = (String) claims.get(CLAIM_KEY_AUDIENCE);
-        } catch (Exception e) {
+        final Claims claims = getClaimsFromToken(token);
+        if(claims != null) {
+            if(claims.get(CLAIM_KEY_AUDIENCE) != null) {
+                audience = (String) claims.get(CLAIM_KEY_AUDIENCE);
+            } else {
+                audience = null;
+            }
+        } else {
             audience = null;
         }
         return audience;
@@ -144,20 +160,21 @@ public class JwtTokenUtil implements Serializable {
 
     public String refreshToken(String token) {
         String refreshedToken;
-        try {
-            final Claims claims = getClaimsFromToken(token);
+        final Claims claims = getClaimsFromToken(token);
+        if(claims != null) {
             claims.put(CLAIM_KEY_CREATED, new Date());
             refreshedToken = generateToken(claims);
-        } catch (Exception e) {
+        } else {
             refreshedToken = null;
         }
+
         return refreshedToken;
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         UserDetails user = userDetails;
         final String username = getUsernameFromToken(token);
-        final Date created = getCreatedDateFromToken(token);
+        //final Date created = getCreatedDateFromToken(token);
         //final Date expiration = getExpirationDateFromToken(token);
         return (
                 username.equals(user.getUsername())

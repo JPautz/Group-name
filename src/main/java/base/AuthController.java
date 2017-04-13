@@ -59,7 +59,7 @@ public class AuthController {
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        UserDetails user = userDetailsService.loadUserByUsername(username);
+        //UserDetails user = userDetailsService.loadUserByUsername(username);
 
         return ResponseEntity.ok(jwtTokenUtil.refreshToken(token));
 
