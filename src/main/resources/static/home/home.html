@@ -67,13 +67,12 @@
     </md-toolbar>
     <md-content layout-padding="" layout="column">
 
-
-        <md-button class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source"
-                   ng-class="{ active: demoCtrl.$showSource }" ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
-            Manage Flowcharts
-        </md-button>
-
         <md-menu ng-show="demoCtrl.$showSource" style="padding: 0px 10px">
+            <md-button class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source"
+                       ng-class="{ active: demoCtrl.$showSource }"
+                       ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
+                Manage Flowcharts
+            </md-button>
             <md-menu-content>
                 <md-menu-item>
                     <md-button>
