@@ -29,17 +29,14 @@ public class FlowchartController {
         if (curUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             flowchartRepository.findAll().forEach(flowchart -> flowcharts.add(flowchart));
         } else {
-            flowchartRepository.findAll().forEach(flowchart -> flowcharts.add(flowchart));
-            //flowcharts.add(new Flowchart("error: must be an admin to access"));
+            flowcharts.add(new Flowchart("error: must be an admin to access"));
         }
         return flowcharts;
     }
 
     @GetMapping("{id}")
     public Flowchart find(@PathVariable Long id, @CurrentUser UserDetails curUser) {
-        User user = userRepository.findByEmail(curUser.getUsername());
-        System.out.println("............................" + curUser.getUsername());
-        if (user != null) {
+        if (userRepository.findByEmail(curUser.getUsername()) != null) {
             return flowchartRepository.findOne(id);
         }
         return null;

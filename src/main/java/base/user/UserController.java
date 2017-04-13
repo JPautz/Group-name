@@ -27,7 +27,6 @@ public class UserController {
     @GetMapping
     public ArrayList<User> getCurUser(@CurrentUser UserDetails curUser) {
         ArrayList<User> users = new ArrayList<>();
-        User addUser = userRepository.findByEmail(curUser.getUsername());
         if (isAdmin(curUser)) {
             userRepository.findAll().forEach(users::add);
         } else {
@@ -97,8 +96,8 @@ public class UserController {
             User x = userRepository.save(reqUser);
             System.out.println(curUser.getUsername());
             return x;
-        } else {
-            return null;
         }
+        return null;
     }
 }
+
