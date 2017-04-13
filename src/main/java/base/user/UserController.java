@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ArrayList<User> getCurUser(@CurrentUser UserDetails curUser) {
+    public List getCurUser(@CurrentUser UserDetails curUser) {
         ArrayList<User> users = new ArrayList<>();
         if (isAdmin(curUser)) {
             userRepository.findAll().forEach(users::add);
@@ -36,26 +36,16 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User find(@PathVariable long id/*, @CurrentUser UserDetails curUser*/) {
+    public User find(@PathVariable long id, @CurrentUser UserDetails curUser) {
         User reqUser = userRepository.findOne(id);
-        return reqUser;
-        /*if (isAdmin(curUser)) {
+        //return reqUser;
+        if (isAdmin(curUser)) {
             return reqUser;
         } else if (reqUser.getEmail().equals(curUser.getUsername())) {
             return reqUser;
         }
-        return null;*/
+        return null;
     }
-
-    //method is redundant
-    /*@RequestMapping("/all")
-    public List<User> getUsers(@CurrentUser UserDetails currentUser) {
-        ArrayList<User> users = new ArrayList<>();
-        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            userRepository.findAll().forEach(users::add);
-        }
-        return users;
-    }*/
 
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody User reqUser) {
@@ -94,7 +84,6 @@ public class UserController {
             reqUser.setEmail(newUser.getEmail());
             reqUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
             User x = userRepository.save(reqUser);
-            System.out.println(curUser.getUsername());
             return x;
         }
         return null;
