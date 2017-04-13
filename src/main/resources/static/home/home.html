@@ -53,7 +53,15 @@
 </md-content>
 
 <md-content id="flowchartHome" layout="row" layout-align="center">
-    <quarter ng-repeat="quarter in quarterArr"></quarter>
+    <md-grid-list
+            md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+            md-row-height-gt-md="1:1" md-row-height="2:2"
+            md-gutter="12px" md-gutter-gt-sm="8px">
+
+        <md-grid-tile md-rowspan="3" md-colspan="2" ng-repeat="quarter in quarterArr">
+            <quarter></quarter>
+        </md-grid-tile>
+    </md-grid-list>
 </md-content>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
