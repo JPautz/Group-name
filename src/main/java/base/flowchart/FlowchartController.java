@@ -5,6 +5,8 @@ import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +46,7 @@ public class FlowchartController {
     }
 
     @PostMapping
-    public Flowchart create(@CurrentUser UserDetails curUser, @RequestBody Flowchart input) {
+    public ResponseEntity<Flowchart> create(@CurrentUser UserDetails curUser, @RequestBody Flowchart input) {
         User user = userRepository.findByEmail(curUser.getUsername());
         if (user != null) {
             Flowchart flowchart = new Flowchart();
@@ -54,9 +56,11 @@ public class FlowchartController {
 
             user.addFlowchart(flowchart);
 
-            return flowchartRepository.save(flowchart);
+            flowchartRepository.save(flowchart);
+
+            return new ResponseEntity<>(flowchart, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -66,14 +70,15 @@ public class FlowchartController {
     }
 
     @PutMapping("{id}")
-    public Flowchart update(@PathVariable Long id, @RequestBody Flowchart input) {
+    public ResponseEntity<Flowchart> update(@PathVariable Long id, @RequestBody Flowchart input) {
         Flowchart flowchart = flowchartRepository.findOne(id);
-        if(flowchart == null) {
-            return null;
-        }
-        else {
+        if (flowchart == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
             flowchart.setName(input.getName());
-            return flowchartRepository.save(flowchart);
+            flowchartRepository.save(flowchart);
+
+            return new ResponseEntity<>(flowchart, HttpStatus.OK);
         }
     }
 

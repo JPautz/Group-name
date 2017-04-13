@@ -1,8 +1,8 @@
 package base.security.config;
 
 import base.security.BaseUserDetailsService;
-import base.security.jwt.JwtAuthenticationTokenFilter;
 import base.security.jwt.JwtAuthenticationEntryPoint;
+import base.security.jwt.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,8 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration // Tell Spring this is a configuration class
 @EnableWebSecurity // Tell Spring to enable security as a web application
-@EnableGlobalMethodSecurity(prePostEnabled=true) // Enable @Pre @PostAuthorize
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+@EnableGlobalMethodSecurity(prePostEnabled = true) // Enable @Pre @PostAuthorize
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${jwt.route.authentication.path}")
     private String authPath;
@@ -34,25 +34,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler) // Custom exception handler. Used to return 401s.
                 .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-            .headers().cacheControl();        // disable page caching
+                .headers().cacheControl();        // disable page caching
 
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.POST, authPath).permitAll()
                 .antMatchers(HttpMethod.POST, "/user").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, BaseUserDetailsService baseUserDetailsService) throws Exception {
         auth
-            .userDetailsService(baseUserDetailsService)
-            .passwordEncoder(new BCryptPasswordEncoder());
+                .userDetailsService(baseUserDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean

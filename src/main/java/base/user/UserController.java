@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UserController  {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;
@@ -27,6 +27,7 @@ public class UserController  {
     @GetMapping
     public ArrayList<User> getCurUser(@CurrentUser UserDetails curUser) {
         ArrayList<User> users = new ArrayList<>();
+        User addUser = userRepository.findByEmail(curUser.getUsername());
         if (isAdmin(curUser)) {
             userRepository.findAll().forEach(users::add);
         } else {
@@ -67,11 +68,11 @@ public class UserController  {
             user.setLastname(reqUser.getLastname());
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
             userRepository.save(user);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         else {
             // email already taken
-            return new ResponseEntity<User>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 

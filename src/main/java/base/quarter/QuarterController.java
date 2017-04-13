@@ -8,6 +8,8 @@ import base.security.CurrentUser;
 import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +44,7 @@ public class QuarterController {
     }
 
     @PostMapping
-    public Quarter create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
+    public ResponseEntity<Quarter> create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
         User user = userRepository.findByEmail(curUser.getUsername());
         if (user != null) {
             Quarter quarter = new Quarter();
@@ -53,9 +55,11 @@ public class QuarterController {
 
             flowchart.addQuarter(quarter);
 
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -65,18 +69,21 @@ public class QuarterController {
     }
 
     @PutMapping("{id}")
-    public Quarter update(@PathVariable Long id, @RequestBody Quarter input) {
+    public ResponseEntity<Quarter> update(@PathVariable Long id, @RequestBody Quarter input) {
         Quarter quarter = quarterRepository.findOne(id);
         if (quarter == null) {
-            return null;
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             quarter.setQuarter(input.getQuarter());
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         }
     }
 
     @PutMapping("/deleteCourse/{id}")
-    public Quarter deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
+    public ResponseEntity<Quarter> deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
         User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
         Quarter quarter = quarterRepository.findOne(id);
@@ -87,14 +94,16 @@ public class QuarterController {
             quarter.removeCourse(course);
             course.removeQuarter(quarter);
 
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
     @PutMapping("/addCourse/{id}")
-    public Quarter addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
+    public ResponseEntity<Quarter> addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
         User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
         Quarter quarter = quarterRepository.findOne(id);
@@ -105,9 +114,11 @@ public class QuarterController {
             quarter.addCourse(course);
             course.addQuarter(quarter);
 
-            return quarterRepository.save(quarter);
+            quarterRepository.save(quarter);
+
+            return new ResponseEntity<>(quarter, HttpStatus.OK);
         } else {
-            return null;
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 }

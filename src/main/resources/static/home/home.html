@@ -1,6 +1,7 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
-        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button" id="hamburger">
+        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button"
+                   id="hamburger">
             <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
         </md-button>
         <h2 flex md-truncate id="title">Mustang Manager</h2>
@@ -14,7 +15,8 @@
             <md-card-title-text>
                 <span class="md-headline">Course Search</span>
                 <md-input-container class="md-block">
-                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'" ng-keyup="$event.keyCode == 13 && search()" autofocus>
+                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'"
+                           ng-keyup="$event.keyCode == 13 && search()" autofocus>
                 </md-input-container>
                 <!--<md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>-->
             </md-card-title-text>
@@ -50,9 +52,19 @@
     </md-card>
 </md-content>
 
-<md-content id="flowchartHome" layout="row" layout-align="center">
-    <quarter ng-repeat="quarter in quarterArr"></quarter>
-</md-content>
+
+<div >
+    <md-content id="flowchartHome">
+        <md-grid-list
+                md-cols-xs="2" md-cols-sm="4" md-cols-md="8" md-cols-gt-md="12"
+                md-row-height-gt-md="1:1" md-row-height="2:2">
+
+            <md-grid-tile md-rowspan="0" md-colspan="0" ng-repeat="quarter in quarterArr">
+                <quarter></quarter>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-content>
+</div>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
     <md-toolbar ng-controller="LeftCtrl" class="md-theme-light">
@@ -64,7 +76,57 @@
         </div>
     </md-toolbar>
     <md-content layout-padding="" layout="column">
-        <md-button class="md-primary faq-dialog-open-button" ng-click="ctrl.showDialog($event)">
+
+        <md-menu ng-show="demoCtrl.$showSource" style="padding: 0px 10px">
+            <md-button class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source"
+                       ng-class="{ active: demoCtrl.$showSource }"
+                       ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
+                Manage Flowcharts
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button>
+                        Flowchart 1
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button>
+                        Flowchart 2
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button>
+                        Flowchart 3
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button>
+                        Flowchart 4
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button>
+                        Flowchart 5
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button>
+                        Create Flowchart
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
+            Export Flowchart
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
+            Add Year
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
+            Remove Year
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-click="ctrl.showDialog($event)" style="text-align:left">
             FAQ
         </md-button>
     </md-content>

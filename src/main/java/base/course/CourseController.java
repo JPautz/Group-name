@@ -1,16 +1,9 @@
 package base.course;
 
-import base.catalog.Catalog;
-import base.catalog.CatalogRepository;
-import base.flowchart.Flowchart;
 import base.flowchart.FlowchartRepository;
-import base.quarter.Quarter;
 import base.quarter.QuarterRepository;
-import base.security.CurrentUser;
-import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

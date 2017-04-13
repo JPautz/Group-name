@@ -1,7 +1,6 @@
 package base.security;
 
 import base.flowchart.Flowchart;
-import base.user.User;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -14,15 +13,16 @@ public class FlowchartPermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication,
                                  Object targetDomainObject, Object permission) {
-        if(authentication == null) {
+        if (authentication == null) {
             return false;
         }
         Flowchart flowchart = (Flowchart) targetDomainObject;
-        if(flowchart == null) {
+        if (flowchart == null) {
             return true;
         }
-        User currentUser = (User) authentication.getPrincipal();
-        return true; //currentUser.getId().equals(flowchart.getUser().getId());
+        /*User currentUser = (User) authentication.getPrincipal();
+        currentUser.getId().equals(flowchart.getUser().getId());*/
+        return true;
     }
 
     @Override
