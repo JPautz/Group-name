@@ -65,52 +65,71 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-content layout-padding="" layout="column">
+
+    <md-content layout-padding="" layout="column" ng-controller="ManageFlowchartMenu">
 
 
-
-
-
-        <md-button class="md-primary faq-dialog-open-button" style="text-align:left"  aria-label="View Source"
-                   ng-class="{ active: demoCtrl.$showSource }" ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
+        <md-button  ng-click="showMenu = !showMenu" ng-class="{ active: showMenu }"
+                    class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source">
             Manage Flowcharts
         </md-button>
 
-        <md-menu ng-show="demoCtrl.$showSource" style="padding: 0px 0px">
-            <md-menu-content style="background: black">
 
-                <md-menu-item>
-                    <md-button class="md-primary faq-dialog-open-button">
-                        Flowchart 1
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button class="md-primary faq-dialog-open-button">
-                        Flowchart 2
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button class="md-primary faq-dialog-open-button">
-                        Flowchart 3
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button class="md-primary faq-dialog-open-button">
-                        Flowchart 4
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button class="md-primary faq-dialog-open-button">
-                        Flowchart 5
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button class="md-primary faq-dialog-open-button">
-                        Create Flowchart
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
+        <md-list ng-show="showMenu">
+            <md-list-item>
+                <md-button class="md-primary faq-dialog-open-button">
+                    Flowchart 1
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="md-primary faq-dialog-open-button">
+                    Flowchart 2
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="md-primary faq-dialog-open-button">
+                    Flowchart 3
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="md-primary faq-dialog-open-button">
+                    Flowchart 4
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="md-primary faq-dialog-open-button">
+                    Flowchart 5
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="md-primary faq-dialog-open-button">
+                    Create Flowchart
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+        <!--
+        <md-button class="md-primary faq-dialog-open-button" ng-show="showMenu" ng-animate>
+            Flowchart 1
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-show="showMenu" ng-animate>
+            Flowchart 2
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-show="showMenu" ng-animate>
+            Flowchart 3
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-show="showMenu" ng-animate>
+            Flowchart 4
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-show="showMenu" ng-animate>
+            Flowchart 5
+        </md-button>
+        <md-button class="md-primary faq-dialog-open-button" ng-show="showMenu">
+            Create Flowchart
+        </md-button>
+        -->
+
+
 
         <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
             Export Flowchart
@@ -124,5 +143,12 @@
         <md-button class="md-primary faq-dialog-open-button" ng-click="ctrl.showDialog($event)" style="text-align:left">
             FAQ
         </md-button>
+
+
+
+
+
+
+
     </md-content>
 </md-sidenav>
