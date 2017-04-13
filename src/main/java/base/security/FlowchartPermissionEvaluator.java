@@ -14,11 +14,11 @@ public class FlowchartPermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication,
                                  Object targetDomainObject, Object permission) {
-        if(authentication == null) {
+        if (authentication == null) {
             return false;
         }
         Flowchart flowchart = (Flowchart) targetDomainObject;
-        if(flowchart == null) {
+        if (flowchart == null) {
             return true;
         }
         User currentUser = (User) authentication.getPrincipal();

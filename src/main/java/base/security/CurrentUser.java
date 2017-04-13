@@ -26,7 +26,7 @@ import java.lang.annotation.*;
  * wish to specify the argument with the value of the current
  * {@link Authentication#getPrincipal()} found on the
  * {@link SecurityContextHolder}.
- *
+ * <p>
  * <p>
  * Creating your own annotation that uses {@link AuthenticationPrincipal} as a
  * meta annotation creates a layer of indirection between your code and Spring
@@ -35,7 +35,6 @@ import java.lang.annotation.*;
  * </p>
  *
  * @author Rob Winch
- *
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)

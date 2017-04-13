@@ -60,10 +60,9 @@ public class FlowchartController {
     @PutMapping("{id}")
     public ResponseEntity<Flowchart> update(@PathVariable Long id, @RequestBody Flowchart input) {
         Flowchart flowchart = flowchartRepository.findOne(id);
-        if(flowchart == null) {
+        if (flowchart == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
+        } else {
             flowchart.setName(input.getName());
             flowchartRepository.save(flowchart);
 

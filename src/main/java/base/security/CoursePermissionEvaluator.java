@@ -1,7 +1,5 @@
 package base.security;
 
-import base.course.Course;
-import base.user.User;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;

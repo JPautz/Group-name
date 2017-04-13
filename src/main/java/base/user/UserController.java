@@ -15,14 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UserController  {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping
     public ResponseEntity<User> getCurUser(@CurrentUser UserDetails curUser) {
-        if(userRepository.findByEmail(curUser.getUsername()) != null) {
+        if (userRepository.findByEmail(curUser.getUsername()) != null) {
             User user = userRepository.findByEmail(curUser.getUsername());
 
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -57,8 +57,7 @@ public class UserController  {
             userRepository.save(user);
 
             return new ResponseEntity<>(user, HttpStatus.OK);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }

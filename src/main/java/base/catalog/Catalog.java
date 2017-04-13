@@ -12,11 +12,11 @@ import java.util.HashMap;
 public class Catalog {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private HashMap<String, Course> courseCatalog;
 
-    public Catalog(){
+    public Catalog() {
         HashMap<String, Course> hm = new HashMap<String, Course>();
         this.courseCatalog = hm;
     }

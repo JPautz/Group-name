@@ -1,6 +1,5 @@
 package base.flowchart;
 
-import base.course.Course;
 import base.quarter.Quarter;
 import base.quarter.QuarterName;
 import base.user.User;
@@ -15,12 +14,12 @@ public class Flowchart {
     private static final int NUM_Q = 12;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "flowchart")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "flowchart")
     private List<Quarter> quarters = new ArrayList<Quarter>();
 
     public Flowchart() {

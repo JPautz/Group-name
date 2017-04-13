@@ -1,6 +1,7 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools">
-        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button" id="hamburger">
+        <md-button aria-label="Menu" ng-click="toggleLeft()" ng-hide="isOpenLeft()" class="md-icon-button"
+                   id="hamburger">
             <md-icon md-svg-icon="assets/icons/menu.svg"></md-icon>
         </md-button>
         <h2 flex md-truncate id="title">Mustang Manager</h2>
@@ -14,7 +15,8 @@
             <md-card-title-text>
                 <span class="md-headline">Course Search</span>
                 <md-input-container class="md-block">
-                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'" ng-keyup="$event.keyCode == 13 && search()" autofocus>
+                    <input ng-model="query" type="text" placeholder="Enter a course... 'CPE123'"
+                           ng-keyup="$event.keyCode == 13 && search()" autofocus>
                 </md-input-container>
                 <!--<md-chips ng-model="ctrl.tags" readonly="false" md-removable="true" md-enable-chip-edit="true" placeholder="Enter a course..."></md-chips>-->
             </md-card-title-text>
@@ -66,9 +68,7 @@
     <md-content layout-padding="" layout="column">
 
 
-
-
-        <md-button class="md-primary faq-dialog-open-button" style="text-align:left"  aria-label="View Source"
+        <md-button class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source"
                    ng-class="{ active: demoCtrl.$showSource }" ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
             Manage Flowcharts
         </md-button>

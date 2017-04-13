@@ -10,7 +10,7 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String title;
@@ -19,10 +19,11 @@ public class Course {
     private String prerequisites;
     private String description;
     private String termsOffered;
-    @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Quarter> quarters = new ArrayList<Quarter>();
 
-    public Course() {}
+    public Course() {
+    }
 
     // Getters
     public Long getId() {

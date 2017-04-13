@@ -1,10 +1,10 @@
 package base.security;
 
 import base.quarter.Quarter;
-import base.user.User;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 @Component
