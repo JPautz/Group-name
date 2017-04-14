@@ -6,6 +6,7 @@ import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +23,22 @@ public class FlowchartController {
     private FlowchartRepository flowchartRepository;
 
     @GetMapping
-    public ArrayList<Flowchart> listAll() {
+    public ArrayList<Flowchart> listAll(@CurrentUser UserDetails curUser) {
         ArrayList<Flowchart> flowcharts = new ArrayList<>();
-        flowchartRepository.findAll().forEach(flowchart -> flowcharts.add(flowchart));
+        if (User.isAdmin(curUser)) {
+            flowchartRepository.findAll().forEach(flowchart -> flowcharts.add(flowchart));
+        } else {
+            flowcharts.add(new Flowchart("error: must be an admin to access"));
+        }
         return flowcharts;
     }
 
     @GetMapping("{id}")
-    public Flowchart find(@PathVariable Long id) {
-        return flowchartRepository.findOne(id);
+    public Flowchart find(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        if (userRepository.findByEmail(curUser.getUsername()) != null) {
+            return flowchartRepository.findOne(id);
+        }
+        return null;
     }
 
     @PostMapping
