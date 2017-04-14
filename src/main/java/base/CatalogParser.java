@@ -5,12 +5,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Component
 public class CatalogParser {
 
     private static final Logger LOGGER = Logger.getLogger(CatalogParser.class.getName());
