@@ -121,3 +121,28 @@ body {
     margin: 0px;
     font-size: 12px;
 }
+
+.menu-button {
+    text-align: left
+}
+.list-button {
+    color: white;
+}
+
+.list-color {
+    background-color: rgb(76,175,80);
+}
+
+.list-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+md-list {
+  transition: ease 0.5s;
+  height: 300px;
+}
+
+.ng-hide {
+  height: 0;
+}
