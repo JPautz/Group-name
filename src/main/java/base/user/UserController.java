@@ -55,7 +55,8 @@ public class UserController {
             user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
             userRepository.save(user);
             return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
+        }
+        else {
             // email already taken
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }

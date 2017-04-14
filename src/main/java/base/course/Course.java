@@ -15,7 +15,7 @@ public class Course {
     private String name;
     private String title;
 
-    private int units;
+    private String units;
     private String prerequisites;
     private String description;
     private String termsOffered;
@@ -38,7 +38,7 @@ public class Course {
         return title;
     }
 
-    public int getUnits() {
+    public String getUnits() {
         return units;
     }
 
@@ -67,7 +67,7 @@ public class Course {
         this.title = title;
     }
 
-    public void setUnits(int units) {
+    public void setUnits(String units) {
         this.units = units;
     }
 
