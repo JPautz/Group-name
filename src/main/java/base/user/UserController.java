@@ -33,14 +33,21 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User find(@PathVariable long id) {
-        return userRepository.findOne(id);
+    public User find(@PathVariable long id, @CurrentUser UserDetails curUser) {
+        User reqUser = userRepository.findOne(id);
+        if (reqUser == null || curUser == null) {
+            return null;
+        }
+        if (User.isAdmin(curUser) || curUser.getUsername().equals(reqUser.getEmail())) {
+            return reqUser;
+        }
+        return null;
     }
 
     @RequestMapping("/all")
-    public List<User> getUsers(@CurrentUser UserDetails currentUser) {
+    public List<User> getUsers(@CurrentUser UserDetails curUser) {
         ArrayList<User> users = new ArrayList<>();
-        if (currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+        if (curUser != null && User.isAdmin(curUser)) {
             userRepository.findAll().forEach(users::add);
         }
         return users;
@@ -69,17 +76,16 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public User update(@PathVariable Long id, @RequestBody User reqUser) {
-        User user = userRepository.findOne(id);
-        if (user == null) {
-            return null;
-        } else {
-            user.setEmail(reqUser.getEmail());
-            user.setFirstname(reqUser.getFirstname());
-            user.setLastname(reqUser.getLastname());
-            user.setEmail(reqUser.getEmail());
-            user.setPassword(new BCryptPasswordEncoder().encode(reqUser.getPassword()));
-            return userRepository.save(user);
+    public User update(@PathVariable Long id, @RequestBody User newUser, @CurrentUser UserDetails curUser) {
+        User reqUser = userRepository.findOne(id);
+        if (reqUser != null && reqUser.getEmail().equals(curUser.getUsername())) {
+            reqUser.setEmail(newUser.getEmail());
+            reqUser.setFirstname(newUser.getFirstname());
+            reqUser.setLastname(newUser.getLastname());
+            reqUser.setEmail(newUser.getEmail());
+            reqUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
+            return userRepository.save(reqUser);
         }
+        return null;
     }
 }
