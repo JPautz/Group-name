@@ -20,12 +20,14 @@ public class Application {
     private static void loadCourses(ApplicationContext ctx) {
         CourseRepository cr = (CourseRepository) ctx.getBean("courseRepository");
 
-        CatalogParser cp = new CatalogParser();
-        ArrayList<String> departments = cp.getDepartments();
+        if (cr.findByName("CPE123") == null) {
+            CatalogParser cp = new CatalogParser();
+            ArrayList<String> departments = cp.getDepartments();
 
-        for (String department : departments) {
-            ArrayList<Course> courses = cp.getCourses(department);
-            cr.save(courses);
+            for (String department : departments) {
+                ArrayList<Course> courses = cp.getCourses(department);
+                cr.save(courses);
+            }
         }
     }
 
