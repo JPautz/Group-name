@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CatalogParser {
@@ -31,7 +32,7 @@ public class CatalogParser {
                 departments.add(department);
             }
         } catch (IOException e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
         return departments;
@@ -56,7 +57,7 @@ public class CatalogParser {
                 courses.add(course);
             }
         } catch (IOException e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
         return courses;
