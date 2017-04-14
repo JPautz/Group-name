@@ -52,16 +52,8 @@
     </md-card>
 </md-content>
 
-<md-content id="flowchartHome">
-    <md-grid-list 
-            md-cols-xs="2" md-cols-sm="4" md-cols-md="8" md-cols-gt-md="12"
-            md-row-height-gt-md="1:1" md-row-height="2:2"
-            md-gutter="1px" md-gutter-gt-sm="1px" style="max-width: 1176px;">
-        
-        <md-grid-tile md-rowspan="0" md-colspan="0" ng-repeat="quarter in quarterArr">
-            <quarter></quarter>
-        </md-grid-tile>
-    </md-grid-list>
+<md-content id="flowchartHome" layout="row" layout-align="center">
+    <quarter ng-repeat="quarter in quarterArr"></quarter>
 </md-content>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
