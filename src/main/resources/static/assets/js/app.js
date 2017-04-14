@@ -7,10 +7,13 @@ angular.module('sample', [
 ])
 
     .run(function($rootScope) {
-        //$rootScope.server_root = 'https://cp-groupname.herokuapp.com/';
-        $rootScope.server_root = 'http://localhost:8080/';
+        $rootScope.server_root = 'https://cp-groupname.herokuapp.com/';
+        //$rootScope.server_root = 'http://localhost:8080/';
     })
-    .config( function myAppConfig ($urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
+    /*.run(function($rootScope) {
+        $rootScope.server_root = 'https://cp-groupname.herokuapp.com/';
+     })*/
+    .config(function myAppConfig($urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/');
 
 
