@@ -3,6 +3,7 @@ angular.module('sample.home', [
     'angular-storage',
     'angular-jwt',
     'ngMaterial',
+    'ngAnimate',
     angularDragula(angular)
 ])
     .config(function ($stateProvider, $mdThemingProvider) {
@@ -221,7 +222,9 @@ angular.module('sample.home', [
             $mdSidenav('left').close();
         };
     })
-
+    .controller('ManageFlowchartMenu', function($scope) {
+        $scope.showMenu = false;
+    })
     .directive('quarter', function () {
         return {
             restrict: "E",

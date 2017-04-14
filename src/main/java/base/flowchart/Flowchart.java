@@ -31,6 +31,11 @@ public class Flowchart {
         }
     }
 
+    //for debugging
+    public Flowchart(String errorMessage) {
+        name = errorMessage;
+    }
+
     // Getters
     public Long getId() {
         return id;
