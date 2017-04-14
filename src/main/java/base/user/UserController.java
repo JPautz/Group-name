@@ -4,7 +4,6 @@ import base.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +19,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    private boolean isAdmin(UserDetails curUser) {
-        return curUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
-    }
-
     @GetMapping
     public List getCurUser(@CurrentUser UserDetails curUser) {
         ArrayList<User> users = new ArrayList<>();
-        if (isAdmin(curUser)) {
+        if (curUser != null && User.isAdmin(curUser)) {
             userRepository.findAll().forEach(users::add);
         } else {
-            users.add(userRepository.findByEmail(curUser.getUsername()));
+            return null;
         }
         return users;
     }
@@ -38,7 +33,7 @@ public class UserController {
     @GetMapping("{id}")
     public User find(@PathVariable long id, @CurrentUser UserDetails curUser) {
         User reqUser = userRepository.findOne(id);
-        if (isAdmin(curUser) || reqUser.getEmail().equals(curUser.getUsername())) {
+        if (User.isAdmin(curUser) || reqUser.getEmail().equals(curUser.getUsername())) {
             return reqUser;
         }
         return null;
@@ -64,7 +59,7 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id, @CurrentUser UserDetails curUser) {
-        if (isAdmin(curUser))
+        if (User.isAdmin(curUser))
             userRepository.delete(id);
     }
 

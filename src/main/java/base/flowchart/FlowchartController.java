@@ -4,7 +4,6 @@ import base.security.CurrentUser;
 import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +24,7 @@ public class FlowchartController {
     @GetMapping
     public ArrayList<Flowchart> listAll(@CurrentUser UserDetails curUser) {
         ArrayList<Flowchart> flowcharts = new ArrayList<>();
-        if (curUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+        if (User.isAdmin(curUser)) {
             flowchartRepository.findAll().forEach(flowchart -> flowcharts.add(flowchart));
         } else {
             flowcharts.add(new Flowchart("error: must be an admin to access"));
