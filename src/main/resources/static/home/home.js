@@ -222,7 +222,7 @@ angular.module('sample.home', [
             $mdSidenav('left').close();
         };
     })
-    .controller('ManageFlowchartMenu', function($scope) {
+    .controller('ManageFlowchartMenu', function ($scope) {
         $scope.showMenu = false;
     })
     .directive('quarter', function () {

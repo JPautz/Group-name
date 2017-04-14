@@ -8,9 +8,11 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class CatalogParser {
 
+    private static final Logger LOGGER = Logger.getLogger(CatalogParser.class.getName());
     private static final String CATALOG_URL = "http://catalog.calpoly.edu/coursesaz/";
     private static final String TERMS_SEARCH = "Term Typically Offered: ";
     private static final String PRE_SEARCH = "Prerequisite: ";
@@ -29,7 +31,7 @@ public class CatalogParser {
                 departments.add(department);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.getMessage());
         }
 
         return departments;
@@ -54,7 +56,7 @@ public class CatalogParser {
                 courses.add(course);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.getMessage());
         }
 
         return courses;
