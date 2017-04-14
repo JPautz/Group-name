@@ -3,6 +3,8 @@ package base.user;
 import base.flowchart.Flowchart;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "users") // 'user' is a keyword in Postgres
 public class User implements Serializable {
+
+    private static final String TEST_ADMIN = "admin@admin.com";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +35,7 @@ public class User implements Serializable {
     @NotEmpty(message = "Password is required.")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
 
     public User() {
@@ -47,6 +51,11 @@ public class User implements Serializable {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.flowcharts = user.getFlowcharts();
+    }
+
+    public static boolean isAdmin(UserDetails curUser) {
+        return curUser.getAuthorities().contains(new SimpleGrantedAuthority
+                ("ROLE_ADMIN")) || curUser.getUsername().equals(TEST_ADMIN);
     }
 
     public Long getId() {

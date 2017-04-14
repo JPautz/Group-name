@@ -52,19 +52,17 @@
     </md-card>
 </md-content>
 
-
-<div>
-    <md-content id="flowchartHome">
-        <md-grid-list
-                md-cols-xs="2" md-cols-sm="4" md-cols-md="8" md-cols-gt-md="12"
-                md-row-height-gt-md="1:1" md-row-height="2:2">
-
-            <md-grid-tile md-rowspan="0" md-colspan="0" ng-repeat="quarter in quarterArr">
-                <quarter></quarter>
-            </md-grid-tile>
-        </md-grid-list>
-    </md-content>
-</div>
+<md-content id="flowchartHome">
+    <md-grid-list 
+            md-cols-xs="2" md-cols-sm="4" md-cols-md="8" md-cols-gt-md="12"
+            md-row-height-gt-md="1:1" md-row-height="2:2"
+            md-gutter="1px" md-gutter-gt-sm="1px" style="max-width: 1176px;">
+        
+        <md-grid-tile md-rowspan="0" md-colspan="0" ng-repeat="quarter in quarterArr">
+            <quarter></quarter>
+        </md-grid-tile>
+    </md-grid-list>
+</md-content>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
     <md-toolbar ng-controller="LeftCtrl" class="md-theme-light">
@@ -75,59 +73,65 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-content layout-padding="" layout="column">
 
-        <md-menu ng-show="demoCtrl.$showSource" style="padding: 0px 10px">
-            <md-button class="md-primary faq-dialog-open-button" style="text-align:left" aria-label="View Source"
-                       ng-class="{ active: demoCtrl.$showSource }"
-                       ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
-                Manage Flowcharts
-            </md-button>
-            <md-menu-content>
-                <md-menu-item>
-                    <md-button>
-                        Flowchart 1
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button>
-                        Flowchart 2
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button>
-                        Flowchart 3
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button>
-                        Flowchart 4
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button>
-                        Flowchart 5
-                    </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                    <md-button>
-                        Create Flowchart
-                    </md-button>
-                </md-menu-item>
-            </md-menu-content>
-        </md-menu>
+    <md-content class="list-padding" layout-padding="" layout="column" ng-controller="ManageFlowchartMenu">
 
-        <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
+        <md-button  ng-click="showMenu = !showMenu" ng-class="{ active: showMenu }"
+                    class="md-primary faq-dialog-open-button menu-button" aria-label="View Source">
+            Manage Flowcharts
+        </md-button>
+
+        <md-list ng-show="showMenu" class="list-color">
+            <md-list-item>
+                <md-button class="faq-dialog-open-button list-button">
+                    Flowchart 1
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="faq-dialog-open-button list-button">
+                    Flowchart 2
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="faq-dialog-open-button list-button">
+                    Flowchart 3
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="faq-dialog-open-button list-button">
+                    Flowchart 4
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="faq-dialog-open-button list-button">
+                    Flowchart 5
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="faq-dialog-open-button list-button">
+                    Create Flowchart
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+        <md-button class="md-primary faq-dialog-open-button menu-button" ng-click="">
             Export Flowchart
         </md-button>
-        <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
+        <md-button class="md-primary faq-dialog-open-button menu-button" ng-click="">
             Add Year
         </md-button>
-        <md-button class="md-primary faq-dialog-open-button" ng-click="" style="text-align:left">
+        <md-button class="md-primary faq-dialog-open-button menu-button" ng-click="">
             Remove Year
         </md-button>
-        <md-button class="md-primary faq-dialog-open-button" ng-click="ctrl.showDialog($event)" style="text-align:left">
+        <md-button class="md-primary faq-dialog-open-button menu-button" ng-click="ctrl.showDialog($event)">
             FAQ
         </md-button>
+
+
+
+
+
+
+
     </md-content>
 </md-sidenav>
