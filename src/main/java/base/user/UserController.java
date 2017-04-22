@@ -69,9 +69,10 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        // ADMIN Route
-        userRepository.delete(id);
+    public void delete(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        if (User.isAdmin(curUser)) {
+            userRepository.delete(id);
+        }
     }
 
     @PutMapping("{id}")

@@ -34,7 +34,8 @@ public class FlowchartController {
 
     @GetMapping("{id}")
     public Flowchart find(@PathVariable Long id, @CurrentUser UserDetails curUser) {
-        if (userRepository.findByEmail(curUser.getUsername()) != null) {
+        User user = userRepository.findByEmail(curUser.getUsername());
+        if (user != null && (User.isAdmin(curUser) || user.hasFlowchart(id))) {
             return flowchartRepository.findOne(id);
         }
         return null;
@@ -46,7 +47,6 @@ public class FlowchartController {
         if (user != null) {
             Flowchart flowchart = new Flowchart();
             flowchart.setName(input.getName());
-
             flowchart.setUser(user);
 
             user.addFlowchart(flowchart);
@@ -60,20 +60,26 @@ public class FlowchartController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        flowchartRepository.delete(id);
+    public void delete(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        User user = userRepository.findByEmail(curUser.getUsername());
+        if (user != null && user.hasFlowchart(id)) {
+            flowchartRepository.delete(id);
+        }
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Flowchart> update(@PathVariable Long id, @RequestBody Flowchart input) {
+    public ResponseEntity<Flowchart> update(@PathVariable Long id, @RequestBody Flowchart input, @CurrentUser UserDetails curUser) {
+        User user = userRepository.findByEmail(curUser.getUsername());
         Flowchart flowchart = flowchartRepository.findOne(id);
+
         if (flowchart == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
+        } else if (user != null && user.hasFlowchart(id)) {
             flowchart.setName(input.getName());
             flowchartRepository.save(flowchart);
-
             return new ResponseEntity<>(flowchart, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
