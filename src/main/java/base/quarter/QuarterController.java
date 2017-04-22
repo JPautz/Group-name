@@ -36,9 +36,8 @@ public class QuarterController {
         final ArrayList<Quarter> quarters = new ArrayList<>();
         if (User.isAdmin(curUser)) {
             quarterRepository.findAll().forEach(quarter -> quarters.add(quarter));
-            return quarters;
         }
-        return null;
+        return quarters;
     }
 
     @GetMapping("{id}")
