@@ -46,7 +46,7 @@ public class CourseController {
 
     @PostMapping
     public Course create(@RequestBody Course input, @CurrentUser UserDetails curUser) {
-        if (User.isAdmin(curUser) == false) {
+        if (!User.isAdmin(curUser)) {
             return null;
         }
 
@@ -72,7 +72,7 @@ public class CourseController {
     public Course update(@PathVariable Long id, @RequestBody Course input, @CurrentUser UserDetails curUser) {
         Course course = courseRepository.findOne(id);
 
-        if (course == null || User.isAdmin(curUser) == false) {
+        if (course == null || !User.isAdmin(curUser)) {
             return null;
         } else {
             course.setName(input.getName());
