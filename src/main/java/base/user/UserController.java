@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity<User> getCurUser(@CurrentUser UserDetails curUser) {
         if (userRepository.findByEmail(curUser.getUsername()) != null) {
-            User user = userRepository.findByEmail(curUser.getUsername());
+            final User user = userRepository.findByEmail(curUser.getUsername());
 
             return new ResponseEntity<>(user, HttpStatus.OK);
 
@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public User find(@PathVariable long id, @CurrentUser UserDetails curUser) {
-        User reqUser = userRepository.findOne(id);
+        final User reqUser = userRepository.findOne(id);
         if (reqUser == null || curUser == null) {
             return null;
         }
@@ -45,7 +45,7 @@ public class UserController {
 
     @RequestMapping("/all")
     public List<User> getUsers(@CurrentUser UserDetails curUser) {
-        ArrayList<User> users = new ArrayList<>();
+        final ArrayList<User> users = new ArrayList<>();
         if (curUser != null && User.isAdmin(curUser)) {
             userRepository.findAll().forEach(users::add);
         }
@@ -55,7 +55,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody User reqUser) {
         if (userRepository.findByEmail(reqUser.getEmail()) == null) {
-            User user = new User();
+            final User user = new User();
             user.setEmail(reqUser.getEmail());
             user.setFirstname(reqUser.getFirstname());
             user.setLastname(reqUser.getLastname());
@@ -77,7 +77,7 @@ public class UserController {
 
     @PutMapping("{id}")
     public User update(@PathVariable Long id, @RequestBody User newUser, @CurrentUser UserDetails curUser) {
-        User reqUser = userRepository.findOne(id);
+        final User reqUser = userRepository.findOne(id);
         if (reqUser != null && reqUser.getEmail().equals(curUser.getUsername())) {
             reqUser.setEmail(newUser.getEmail());
             reqUser.setFirstname(newUser.getFirstname());

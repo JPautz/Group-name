@@ -84,4 +84,12 @@ public class Flowchart {
 
         return false;
     }
+    public boolean hasQuarter(long id) {
+        for (Quarter quarter : quarters) {
+            if (quarter.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

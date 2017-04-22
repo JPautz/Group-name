@@ -125,4 +125,12 @@ public class User implements Serializable {
         }
         return false;
     }
+    public boolean hasQuarter(long id) {
+        for (Flowchart flowchart : flowcharts) {
+            if (flowchart.hasQuarter(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
