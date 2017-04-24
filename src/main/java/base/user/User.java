@@ -116,4 +116,21 @@ public class User implements Serializable {
     public void removeFlowchart(Flowchart flowchart) {
         flowcharts.remove(flowchart);
     }
+
+    public boolean hasFlowchart(long id) {
+        for (Flowchart flowchart : flowcharts) {
+            if (flowchart.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasQuarter(long id) {
+        for (Flowchart flowchart : flowcharts) {
+            if (flowchart.hasQuarter(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

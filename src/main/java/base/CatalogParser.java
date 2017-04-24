@@ -4,15 +4,21 @@ import base.course.Course;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+@Component
 public class CatalogParser {
 
+    private static final Logger LOGGER = Logger.getLogger(CatalogParser.class.getName());
     private static final String CATALOG_URL = "http://catalog.calpoly.edu/coursesaz/";
+    private static final String TERMS_SEARCH = "Term Typically Offered: ";
+    private static final String PRE_SEARCH = "Prerequisite: ";
 
     public CatalogParser() {
     }
@@ -28,7 +34,7 @@ public class CatalogParser {
                 departments.add(department);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
         return departments;
@@ -53,42 +59,71 @@ public class CatalogParser {
                 courses.add(course);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
         return courses;
     }
 
     private String extractCourseName(Element courseElement) {
-        Elements titleElement = courseElement.select(".courseblocktitle").select("strong");
-        String courseName = titleElement.text().split("[/^(.*?)./]")[0];
+        Elements nameElement = courseElement.select(".courseblocktitle").select("strong");
+
+        String courseName = nameElement.text().split("[/^(.*?)./]")[0];
         courseName = courseName.replace("\u00a0", "");
+
         return courseName;
     }
 
     private String extractCourseTitle(Element courseElement) {
         Elements titleElement = courseElement.select(".courseblocktitle").select("strong");
-        String courseTitle = titleElement.text().split("[/^(.*?)./]")[0];
+
+        String courseTitle = titleElement.text().split("\\.")[1].trim();
+
         return courseTitle;
     }
 
     private String extractCourseUnits(Element courseElement) {
-        String courseUnits = "";
+        Elements unitElement = courseElement.select(".courseblocktitle").select("strong").select("span");
+
+        String courseUnits = unitElement.text().split(" ")[0];
+
         return courseUnits;
     }
 
     private String extractCoursePrerequisites(Element courseElement) {
-        String coursePrerequisites = "";
+        Elements preElement = courseElement.select("div").get(1).select("p:contains(" + PRE_SEARCH + ")");
+
+        String coursePrerequisites;
+        if (preElement.size() == 0) {
+            coursePrerequisites = "None.";
+        } else {
+            coursePrerequisites = preElement.text();
+        }
+        coursePrerequisites = coursePrerequisites.substring(0, Math.min(coursePrerequisites.length(), 255));
+
         return coursePrerequisites;
     }
 
     private String extractCourseDescription(Element courseElement) {
-        String courseDescription = "";
+        Elements descElement = courseElement.select("div").get(2).select("p");
+
+        String courseDescription = descElement.text();
+        courseDescription = courseDescription.substring(0, Math.min(courseDescription.length(), 255));
+
         return courseDescription;
     }
 
     private String extractCourseTermsOffered(Element courseElement) {
-        String courseTermsOffered = "";
+        Elements offElement = courseElement.select("div").get(1).select("p:contains(" + TERMS_SEARCH + ")");
+
+        String courseTermsOffered;
+        if (offElement.size() == 0) {
+            courseTermsOffered = "N/A";
+        } else {
+            courseTermsOffered = offElement.text();
+            courseTermsOffered = courseTermsOffered.substring(TERMS_SEARCH.length(), Math.min(courseTermsOffered.length(), 255));
+        }
+
         return courseTermsOffered;
     }
 }

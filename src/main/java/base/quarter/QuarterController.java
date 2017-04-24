@@ -32,20 +32,28 @@ public class QuarterController {
     private CourseRepository courseRepository;
 
     @GetMapping
-    public ArrayList<Quarter> listAll() {
-        ArrayList<Quarter> quarters = new ArrayList<>();
-        quarterRepository.findAll().forEach(quarter -> quarters.add(quarter));
+    public ArrayList<Quarter> listAll(@CurrentUser UserDetails curUser) {
+        final ArrayList<Quarter> quarters = new ArrayList<>();
+        if (User.isAdmin(curUser)) {
+            quarterRepository.findAll().forEach(quarter -> quarters.add(quarter));
+        }
         return quarters;
     }
 
     @GetMapping("{id}")
-    public Quarter find(@PathVariable Long id) {
-        return quarterRepository.findOne(id);
+    public Quarter find(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        final User user = userRepository.findByEmail(curUser.getUsername());
+
+        if (user != null && (User.isAdmin(curUser) || user.hasQuarter(id))) {
+            return quarterRepository.findOne(id);
+        }
+        return null;
     }
 
     @PostMapping
     public ResponseEntity<Quarter> create(@CurrentUser UserDetails curUser, @RequestBody Quarter input) {
-        User user = userRepository.findByEmail(curUser.getUsername());
+        final User user = userRepository.findByEmail(curUser.getUsername());
+
         if (user != null) {
             Quarter quarter = new Quarter();
             quarter.setQuarter(input.getQuarter());
@@ -64,31 +72,35 @@ public class QuarterController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        quarterRepository.delete(id);
+    public void delete(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        if (userRepository.findByEmail(curUser.getUsername()).hasQuarter(id)) {
+            quarterRepository.delete(id);
+        }
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Quarter> update(@PathVariable Long id, @RequestBody Quarter input) {
+    public ResponseEntity<Quarter> update(@PathVariable Long id, @RequestBody Quarter input, @CurrentUser UserDetails curUser) {
         Quarter quarter = quarterRepository.findOne(id);
-        if (quarter == null) {
+        User user = userRepository.findByEmail(curUser.getUsername());
 
+        if (quarter == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
+        } else if (user != null && user.hasQuarter(id)) {
             quarter.setQuarter(input.getQuarter());
             quarterRepository.save(quarter);
 
             return new ResponseEntity<>(quarter, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
     @PutMapping("/deleteCourse/{id}")
     public ResponseEntity<Quarter> deleteCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
-        User user = userRepository.findByEmail(curUser.getUsername());
-        Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-        Quarter quarter = quarterRepository.findOne(id);
+        final User user = userRepository.findByEmail(curUser.getUsername());
+        final Quarter quarter = quarterRepository.findOne(id);
 
-        if (flowchart.ownsQuarter(quarter)) {
+        if (user.hasQuarter(id)) {
             Course course = courseRepository.findByName(input.getName());
 
             quarter.removeCourse(course);
@@ -104,11 +116,10 @@ public class QuarterController {
 
     @PutMapping("/addCourse/{id}")
     public ResponseEntity<Quarter> addCourse(@CurrentUser UserDetails curUser, @RequestBody Course input, @PathVariable long id) {
-        User user = userRepository.findByEmail(curUser.getUsername());
-        Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-        Quarter quarter = quarterRepository.findOne(id);
+        final User user = userRepository.findByEmail(curUser.getUsername());
+        final Quarter quarter = quarterRepository.findOne(id);
 
-        if (flowchart.ownsQuarter(quarter)) {
+        if (user.hasQuarter(id)) {
             Course course = courseRepository.findByName(input.getName());
 
             quarter.addCourse(course);
