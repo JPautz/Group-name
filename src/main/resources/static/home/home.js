@@ -25,10 +25,13 @@ angular.module('sample.home', [
         $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
 
         $scope.content = [];
+        $scope.yearArr = [];
         $scope.quarterArr = [];
 
         $scope.getContent = function () {
             var errorText;
+            var tempArr = [];
+            var yLen, i, j, qLen;
             $http({
                 url: $rootScope.server_root + 'user',
                 method: 'GET',
@@ -37,7 +40,16 @@ angular.module('sample.home', [
                 }
             }).then(function (response) {
                 $scope.content = response.data;
-                $scope.quarterArr = response.data.flowcharts[0].quarters;
+                $scope.yearArr = response.data.flowcharts[0].years;
+                yLen = $scope.yearArr.length;
+                //this is not done
+                for(i = 0; i < yLen; i++) {
+                //its pissed about this
+                    tempArr = response.data.flowcharts[0].years[yLen].quarters;
+                    for(j = 0; j < qLen; j++) {
+                        $scope.quarterArr.push(tempArr[j]);
+                    }
+                }
             }, function (error) {
                 console.log(error);
                 if (error.status == 500) {

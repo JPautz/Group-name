@@ -2,6 +2,8 @@ package base.quarter;
 
 import base.course.Course;
 import base.flowchart.Flowchart;
+import base.year.Year;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Quarter {
     private Long id;
     private QuarterName quarter;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Flowchart flowchart;
+    private Year year;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "quarters")
     private List<Course> courses = new ArrayList<Course>();
 
@@ -35,6 +37,11 @@ public class Quarter {
         return courses;
     }
 
+    @JsonIgnore
+    public Year getYear() {
+        return year;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -44,8 +51,8 @@ public class Quarter {
         this.quarter = quarter;
     }
 
-    public void setFlowchart(Flowchart flowchart) {
-        this.flowchart = flowchart;
+    public void setYear(Year year) {
+        this.year = year;
     }
 
     // Courses

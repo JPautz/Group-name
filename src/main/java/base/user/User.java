@@ -1,6 +1,7 @@
 package base.user;
 
 import base.flowchart.Flowchart;
+import base.year.Year;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -125,10 +126,21 @@ public class User implements Serializable {
         }
         return false;
     }
+
+    public boolean hasYear(long  id) {
+        for (Flowchart flowchart : flowcharts) {
+            if(flowchart.hasYear(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public boolean hasQuarter(long id) {
         for (Flowchart flowchart : flowcharts) {
-            if (flowchart.hasQuarter(id)) {
-                return true;
+            for(Year year: flowchart.getYears()) {
+                if (year.hasQuarter(id)) {
+                    return true;
+                }
             }
         }
         return false;

@@ -4,6 +4,8 @@ import base.course.Course;
 import base.course.CourseRepository;
 import base.flowchart.Flowchart;
 import base.flowchart.FlowchartRepository;
+import base.year.Year;
+import base.year.YearRepository;
 import base.security.CurrentUser;
 import base.user.User;
 import base.user.UserRepository;
@@ -31,6 +33,9 @@ public class QuarterController {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private YearRepository yearRepository;
+
     @GetMapping
     public ArrayList<Quarter> listAll(@CurrentUser UserDetails curUser) {
         final ArrayList<Quarter> quarters = new ArrayList<>();
@@ -57,11 +62,12 @@ public class QuarterController {
         if (user != null) {
             Quarter quarter = new Quarter();
             quarter.setQuarter(input.getQuarter());
-
+            //temporary, will need to be reworked
             Flowchart flowchart = flowchartRepository.findByUser(user).get(0);
-            quarter.setFlowchart(flowchart);
+            Year year = flowchart.getYears().get(0);
+            quarter.setYear(year);
 
-            flowchart.addQuarter(quarter);
+            year.addQuarter(quarter);
 
             quarterRepository.save(quarter);
 
