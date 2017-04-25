@@ -1,7 +1,6 @@
 package base.quarter;
 
 import base.course.Course;
-import base.flowchart.Flowchart;
 import base.year.Year;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

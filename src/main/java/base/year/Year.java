@@ -22,14 +22,14 @@ public class Year {
   @ManyToOne(fetch=FetchType.LAZY)
   private Flowchart flowchart;
   @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "year")
-  private List<Quarter> quarters = new ArrayList<Quarter>();
+  private List<Quarter> quarters = new ArrayList<>();
 
   public Year() {}
 
   public Year(String name, boolean showSummer, Flowchart flowchart) {
     this.name = name;
     this.showSummer = showSummer;
-    this.quarters = new ArrayList<Quarter>();
+    this.quarters = new ArrayList<>();
     this.flowchart = flowchart;
     initializeQuarters();
   }
@@ -62,7 +62,7 @@ public class Year {
   @JsonIgnore
   public Flowchart getFlowchart() { return this.flowchart; }
 
-  public void setName(String date) { this.name = name; }
+  public void setName(String name) { this.name = name; }
 
   public void setShowSummer(boolean showSummer) {
     this.showSummer =  showSummer;

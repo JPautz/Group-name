@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/year")
@@ -27,13 +29,13 @@ public class YearController {
   private FlowchartRepository flowchartRepository;
 
   @GetMapping
-  public ArrayList<Year> listAll(@CurrentUser UserDetails curUser) {
+  public List<Year> listAll(@CurrentUser UserDetails curUser) {
     ArrayList<Year> years = new ArrayList<>();
     if (User.isAdmin(curUser)) {
       yearRepository.findAll().forEach(year -> years.add(year));
     } else {
       //years.add(new Year("error: must be an admin to access"));
-      return null;
+      return Collections.emptyList();
     }
     return years;
   }

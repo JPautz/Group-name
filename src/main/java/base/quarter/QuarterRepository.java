@@ -1,6 +1,5 @@
 package base.quarter;
 
-import base.flowchart.Flowchart;
 import base.year.Year;
 import org.springframework.data.repository.CrudRepository;
 
