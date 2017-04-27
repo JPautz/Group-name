@@ -25,7 +25,7 @@ public class FlowchartController {
     public ArrayList<Flowchart> listAll(@CurrentUser UserDetails curUser) {
         ArrayList<Flowchart> flowcharts = new ArrayList<>();
         if (User.isAdmin(curUser)) {
-            flowchartRepository.findAll().forEach(flowchart -> flowcharts.add(flowchart));
+            flowchartRepository.findAll().forEach(flowcharts::add);
         } else {
             flowcharts.add(new Flowchart("error: must be an admin to access"));
         }

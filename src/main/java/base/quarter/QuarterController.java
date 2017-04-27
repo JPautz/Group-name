@@ -40,7 +40,7 @@ public class QuarterController {
     public ArrayList<Quarter> listAll(@CurrentUser UserDetails curUser) {
         final ArrayList<Quarter> quarters = new ArrayList<>();
         if (User.isAdmin(curUser)) {
-            quarterRepository.findAll().forEach(quarter -> quarters.add(quarter));
+            quarterRepository.findAll().forEach(quarters::add);
         }
         return quarters;
     }
