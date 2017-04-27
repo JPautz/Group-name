@@ -51,7 +51,7 @@ angular.module('sample.login', [
     })
     .directive('autofocus', function ($timeout) {
         return {
-            link: function (scope, element, attrs) {
+            link: function (scope, element) {
                 $timeout(function () {
                     element.focus();
                 });

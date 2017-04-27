@@ -1,8 +1,8 @@
 package base.flowchart;
 
-import base.quarter.Quarter;
-import base.quarter.QuarterName;
 import base.user.User;
+import base.year.Year;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,24 +11,21 @@ import java.util.List;
 @Entity
 public class Flowchart {
 
-    private static final int NUM_Q = 12;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "flowchart")
-    private List<Quarter> quarters = new ArrayList<Quarter>();
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flowchart")
+    private List<Year> years;
 
     public Flowchart() {
-        for (int curQ = 0; curQ < NUM_Q; ++curQ) {
-            Quarter quarter = new Quarter();
-            quarter.setQuarter(QuarterName.values()[curQ % (QuarterName.values().length - 1)]);
-            quarter.setFlowchart(this);
-            quarters.add(quarter);
-        }
+        years = new ArrayList<>();
+        this.years.add(new Year("Freshman", false, this));
+        this.years.add(new Year("Sophomore", false, this));
+        this.years.add(new Year("Junior", false, this));
+        this.years.add(new Year("Senior", false, this));
     }
 
     //for debugging
@@ -45,8 +42,13 @@ public class Flowchart {
         return name;
     }
 
-    public List<Quarter> getQuarters() {
-        return quarters;
+    public List<Year> getYears() {
+        return years;
+    }
+
+    @JsonIgnore
+    public User getUser() {
+        return this.user;
     }
 
     // Setters
@@ -62,31 +64,31 @@ public class Flowchart {
         this.user = user;
     }
 
-    public void setQuarters(List<Quarter> quarters) {
-        this.quarters = quarters;
+    public void setYears(List<Year> years) {
+        this.years = years;
     }
 
     // Quarters
-    public void addQuarter(Quarter quarter) {
-        quarters.add(quarter);
+    public void addYear(Year year) {
+        years.add(year);
     }
 
-    public void removeQuarter(Quarter quarter) {
-        quarters.remove(quarter);
+    public void removeYear(Year year) {
+        years.remove(year);
     }
 
-    public boolean ownsQuarter(Quarter quarter) {
-        for (Quarter q : quarters) {
-            if (q.getId() == quarter.getId()) {
+    public boolean ownsYear(Year year) {
+        for (Year y : years) {
+            if (y.getId() == year.getId()) {
                 return true;
             }
         }
 
         return false;
     }
-    public boolean hasQuarter(long id) {
-        for (Quarter quarter : quarters) {
-            if (quarter.getId() == id) {
+    public boolean hasYear(long id) {
+        for (Year year : years) {
+            if (year.getId() == id) {
                 return true;
             }
         }

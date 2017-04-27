@@ -30,7 +30,7 @@ public class CourseController {
     @GetMapping
     public ArrayList<Course> listAll() {
         ArrayList<Course> courses = new ArrayList<>();
-        courseRepository.findAll().forEach(course -> courses.add(course));
+        courseRepository.findAll().forEach(courses::add);
         return courses;
     }
 
