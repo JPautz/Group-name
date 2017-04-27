@@ -26,7 +26,6 @@ angular.module('sample.home', [
 
         $scope.content = [];
         $scope.yearArr = [];
-        $scope.quarterArr = [];
 
         $scope.getContent = function () {
             var errorText;
@@ -39,12 +38,6 @@ angular.module('sample.home', [
             }).then(function (response) {
                 $scope.content = response.data;
                 $scope.yearArr = response.data.flowcharts[0].years;
-
-                for (var i = 0; i < 4; i++) {
-                    for (var j = 0; j < 3; j++) {
-                        $scope.quarterArr.push(response.data.flowcharts[0].years[i].quarters[j]);
-                    }
-                }
             }, function (error) {
                 if (error.status == 500) {
                     errorText = 'An Error occurred getting user information, make sure you are logged in.';
@@ -101,7 +94,6 @@ angular.module('sample.home', [
 
         function buildToggler(navID) {
             return function () {
-                // Component lookup should always be available since we are not using `ng-if`
                 $mdSidenav(navID)
                     .toggle();
             };
