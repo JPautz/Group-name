@@ -38,6 +38,7 @@ angular.module('sample.home', [
                 }
             }).then(function (response) {
                 $scope.content = response.data;
+                $scope.yearArr = response.data.flowcharts[0].years;
 
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 3; j++) {
@@ -230,6 +231,12 @@ angular.module('sample.home', [
     })
     .controller('ManageFlowchartMenu', function ($scope) {
         $scope.showMenu = false;
+    })
+    .directive('year', function() {
+        return {
+            restrict: "E",
+            templateUrl: 'home/year.tmpl.html'
+        };
     })
     .directive('quarter', function () {
         return {
