@@ -18,7 +18,7 @@ public class Flowchart {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "flowchart")
-    private List<Year> years = new ArrayList<Year>();
+    private List<Year> years = new ArrayList<>();
 
     public Flowchart() {
         this.years.add(new Year("Freshman", false, this));

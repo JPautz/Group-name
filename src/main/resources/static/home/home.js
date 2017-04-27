@@ -30,8 +30,6 @@ angular.module('sample.home', [
 
         $scope.getContent = function () {
             var errorText;
-            var tempArr = [];
-            var yLen, i, j, qLen;
             $http({
                 url: $rootScope.server_root + 'user',
                 method: 'GET',
@@ -40,14 +38,10 @@ angular.module('sample.home', [
                 }
             }).then(function (response) {
                 $scope.content = response.data;
-                $scope.yearArr = response.data.flowcharts[0].years;
-                yLen = $scope.yearArr.length;
-                //this is not done
-                for(i = 0; i < yLen; i++) {
-                //its pissed about this
-                    tempArr = response.data.flowcharts[0].years[yLen].quarters;
-                    for(j = 0; j < qLen; j++) {
-                        $scope.quarterArr.push(tempArr[j]);
+
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 3; j++) {
+                        $scope.quarterArr.push(response.data.flowcharts[0].years[i].quarters[j]);
                     }
                 }
             }, function (error) {
