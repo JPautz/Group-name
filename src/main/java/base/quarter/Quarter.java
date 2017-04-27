@@ -18,9 +18,10 @@ public class Quarter {
     @ManyToOne(fetch = FetchType.LAZY)
     private Year year;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "quarters")
-    private List<Course> courses = new ArrayList<Course>();
+    private List<Course> courses;
 
     public Quarter() {
+        courses = new ArrayList<>();
     }
 
     // Getters

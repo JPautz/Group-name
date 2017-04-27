@@ -46,7 +46,6 @@ angular.module('sample.home', [
                     }
                 }
             }, function (error) {
-                console.log(error);
                 if (error.status == 500) {
                     errorText = 'An Error occurred getting user information, make sure you are logged in.';
                 } else {
@@ -71,15 +70,6 @@ angular.module('sample.home', [
         };
 
         $scope.getContent();
-
-        /*$scope.intervalContent = function() {
-         $timeout(function() {
-         $scope.getContent();
-         $scope.intervalData();
-         }, 10000);
-         };
-
-         $scope.intervalContent();*/
 
         $scope.logout = function () {
             store.set('jwt', '');
@@ -132,7 +122,6 @@ angular.module('sample.home', [
                 $scope.termsOffered = response.data.termsOffered;
                 $scope.prerequisites = response.data.prerequisites;
             }, function (error) {
-                console.log(error);
             });
         };
 
@@ -146,7 +135,6 @@ angular.module('sample.home', [
         });
 
         $scope.$on('quarter-bag.drop', function (e, el, target, source) {
-            var courseId = el[0].className.split(" ")[0];
             var courseName = el[0].className.split(" ")[1];
             var sourceId = source[0].className.split(" ")[1];
             var targetId = target[0].className.split(" ")[1];
@@ -161,7 +149,7 @@ angular.module('sample.home', [
                 data: {
                     'name': courseName
                 }
-            }).then(function (response) {
+            }).then(function () {
                 if (!isNaN(sourceId)) {
                     $http({
                         url: $rootScope.server_root + 'quarter/deleteCourse/' + sourceId,
@@ -172,34 +160,9 @@ angular.module('sample.home', [
                         data: {
                             'name': courseName
                         }
-                    }).then(function (response) {
-
-                    }, function (error) {
-                        console.log(error);
-                        if (error.status == 401) {
-                            errorText = 'Please assure you are properly authenticated by logging in again.';
-                        } else {
-                            errorText = 'An Error occurred moving course, please try again. Error code ' + error.status;
-                        }
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .clickOutsideToClose(true)
-                                .title('Unable to Move Course')
-                                .textContent(errorText.toString())
-                                .ok('Okay')
-                                .openFrom({
-                                    top: -50,
-                                    width: 30,
-                                    height: 80
-                                })
-                                .closeTo({
-                                    left: 1500
-                                })
-                        );
                     });
                 }
             }, function (error) {
-                console.log(error);
                 if (error.status == 401) {
                     errorText = 'Please assure you are properly authenticated by logging in again.';
                 } else {
@@ -252,7 +215,7 @@ angular.module('sample.home', [
     })
     .directive('autofocus', function ($timeout) {
         return {
-            link: function (scope, element, attrs) {
+            link: function (scope, element) {
                 $timeout(function () {
                     element.focus();
                 });

@@ -37,9 +37,10 @@ public class User implements Serializable {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
+    private List<Flowchart> flowcharts;
 
     public User() {
+        flowcharts = new ArrayList<>();
         Flowchart flowchart = new Flowchart();
         flowchart.setName("Flowchart 1");
         flowchart.setUser(this);
@@ -47,6 +48,7 @@ public class User implements Serializable {
     }
 
     public User(User user) {
+        flowcharts = new ArrayList<>();
         this.firstname = user.getFirstname();
         this.lastname = user.getLastname();
         this.email = user.getEmail();

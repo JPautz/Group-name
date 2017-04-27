@@ -22,12 +22,14 @@ public class Year {
     @ManyToOne(fetch = FetchType.LAZY)
     private Flowchart flowchart;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "year")
-    private List<Quarter> quarters = new ArrayList<>();
+    private List<Quarter> quarters;
 
     public Year() {
+        quarters = new ArrayList<>();
     }
 
     public Year(String name, boolean showSummer, Flowchart flowchart) {
+        quarters = new ArrayList<>();
         this.name = name;
         this.showSummer = showSummer;
         this.quarters = new ArrayList<>();
