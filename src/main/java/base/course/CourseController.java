@@ -2,8 +2,11 @@ package base.course;
 
 import base.flowchart.FlowchartRepository;
 import base.quarter.QuarterRepository;
+import base.security.CurrentUser;
+import base.user.User;
 import base.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,7 +30,7 @@ public class CourseController {
     @GetMapping
     public ArrayList<Course> listAll() {
         ArrayList<Course> courses = new ArrayList<>();
-        courseRepository.findAll().forEach(course -> courses.add(course));
+        courseRepository.findAll().forEach(courses::add);
         return courses;
     }
 
@@ -42,7 +45,11 @@ public class CourseController {
     }
 
     @PostMapping
-    public Course create(@RequestBody Course input) {
+    public Course create(@RequestBody Course input, @CurrentUser UserDetails curUser) {
+        if (!User.isAdmin(curUser)) {
+            return null;
+        }
+
         Course course = new Course();
         course.setName(input.getName());
         course.setTitle(input.getTitle());
@@ -55,14 +62,17 @@ public class CourseController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        courseRepository.delete(id);
+    public void delete(@PathVariable Long id, @CurrentUser UserDetails curUser) {
+        if (User.isAdmin(curUser)) {
+            courseRepository.delete(id);
+        }
     }
 
     @PutMapping("{id}")
-    public Course update(@PathVariable Long id, @RequestBody Course input) {
+    public Course update(@PathVariable Long id, @RequestBody Course input, @CurrentUser UserDetails curUser) {
         Course course = courseRepository.findOne(id);
-        if (course == null) {
+
+        if (course == null || !User.isAdmin(curUser)) {
             return null;
         } else {
             course.setName(input.getName());

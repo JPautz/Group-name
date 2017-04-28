@@ -1,6 +1,7 @@
 package base.user;
 
 import base.flowchart.Flowchart;
+import base.year.Year;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,9 +37,10 @@ public class User implements Serializable {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Flowchart> flowcharts = new ArrayList<Flowchart>();
+    private List<Flowchart> flowcharts;
 
     public User() {
+        flowcharts = new ArrayList<>();
         Flowchart flowchart = new Flowchart();
         flowchart.setName("Flowchart 1");
         flowchart.setUser(this);
@@ -46,6 +48,7 @@ public class User implements Serializable {
     }
 
     public User(User user) {
+        flowcharts = new ArrayList<>();
         this.firstname = user.getFirstname();
         this.lastname = user.getLastname();
         this.email = user.getEmail();
@@ -115,5 +118,33 @@ public class User implements Serializable {
 
     public void removeFlowchart(Flowchart flowchart) {
         flowcharts.remove(flowchart);
+    }
+
+    public boolean hasFlowchart(long id) {
+        for (Flowchart flowchart : flowcharts) {
+            if (flowchart.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasYear(long  id) {
+        for (Flowchart flowchart : flowcharts) {
+            if(flowchart.hasYear(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasQuarter(long id) {
+        for (Flowchart flowchart : flowcharts) {
+            for(Year year: flowchart.getYears()) {
+                if (year.hasQuarter(id)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

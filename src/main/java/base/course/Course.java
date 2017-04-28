@@ -20,9 +20,10 @@ public class Course {
     private String description;
     private String termsOffered;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Quarter> quarters = new ArrayList<Quarter>();
+    private List<Quarter> quarters;
 
     public Course() {
+        quarters = new ArrayList<>();
     }
 
     // Getters

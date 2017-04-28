@@ -125,12 +125,13 @@ body {
 .menu-button {
     text-align: left
 }
+
 .list-button {
     color: white;
 }
 
 .list-color {
-    background-color: rgb(76,175,80);
+    background-color: rgb(76, 175, 80);
 }
 
 .list-padding {
@@ -141,8 +142,9 @@ body {
 md-list {
   transition: ease-out 0.5s;
   height: 300px;
+
 }
 
 .ng-hide {
-  height: 0;
+    height: 0;
 }

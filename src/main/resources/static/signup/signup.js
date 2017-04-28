@@ -52,7 +52,7 @@ angular.module('sample.signup', [
     })
     .directive('autofocus', function ($timeout) {
         return {
-            link: function (scope, element, attrs) {
+            link: function (scope, element) {
                 $timeout(function () {
                     element.focus();
                 });

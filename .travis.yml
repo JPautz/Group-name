@@ -6,6 +6,6 @@ install:
  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 addons:
   sonarqube:
-    organization: "assumption-github"
+    organization: "308309"
 script:
  - sonar-scanner

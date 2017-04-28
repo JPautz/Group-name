@@ -52,8 +52,8 @@
     </md-card>
 </md-content>
 
-<md-content id="flowchartHome" layout="row" layout-align="center">
-    <quarter ng-repeat="quarter in quarterArr"></quarter>
+<md-content id="flowchartHome" layout="row" layout-align="center" layout-wrap>
+    <year ng-repeat="year in yearArr"></year>
 </md-content>
 
 <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
@@ -67,8 +67,9 @@
     </md-toolbar>
 
     <md-content class="list-padding" layout-padding="" layout="column" ng-controller="ManageFlowchartMenu">
-        <md-button  ng-click="showMenu = !showMenu" ng-class="{ active: showMenu }"
-                    class="md-primary faq-dialog-open-button menu-button" aria-label="View Source">
+
+        <md-button ng-click="showMenu = !showMenu" ng-class="{ active: showMenu }"
+                   class="md-primary faq-dialog-open-button menu-button" aria-label="View Source">
             Manage Flowcharts
         </md-button>
 
