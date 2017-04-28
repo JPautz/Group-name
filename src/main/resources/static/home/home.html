@@ -74,33 +74,13 @@
         </md-button>
 
         <md-list ng-show="showMenu" class="list-color">
-            <md-list-item>
+            <md-list-item ng-repeat="flowchart in flowchartArr">
                 <md-button class="faq-dialog-open-button list-button">
-                    Flowchart 1
+                    {{flowchart.name}}
                 </md-button>
             </md-list-item>
             <md-list-item>
-                <md-button class="faq-dialog-open-button list-button">
-                    Flowchart 2
-                </md-button>
-            </md-list-item>
-            <md-list-item>
-                <md-button class="faq-dialog-open-button list-button">
-                    Flowchart 3
-                </md-button>
-            </md-list-item>
-            <md-list-item>
-                <md-button class="faq-dialog-open-button list-button">
-                    Flowchart 4
-                </md-button>
-            </md-list-item>
-            <md-list-item>
-                <md-button class="faq-dialog-open-button list-button">
-                    Flowchart 5
-                </md-button>
-            </md-list-item>
-            <md-list-item>
-                <md-button class="faq-dialog-open-button list-button">
+                <md-button class="faq-dialog-open-button list-button" ng-click="createFlowchart()">
                     Create Flowchart
                 </md-button>
             </md-list-item>
@@ -118,7 +98,6 @@
         <md-button class="md-primary faq-dialog-open-button menu-button" ng-click="ctrl.showDialog($event)">
             FAQ
         </md-button>
-
 
     </md-content>
 </md-sidenav>
