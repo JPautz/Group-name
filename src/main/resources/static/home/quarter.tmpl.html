@@ -4,7 +4,7 @@
             <span class="md-headline quarterTitle">{{quarter.quarter}}</span>
         </md-card-title-text>
     </md-card-title>
-    <md-card-content class="flowchartSpace {{quarter.id}}" dragula='"quarter-bag"' dragula-scope="$parent">
+    <md-card-content class="flowchartCard {{quarter.id}}" dragula='"quarter-bag"' dragula-scope="$parent">
         <course class="{{course.id}} {{course.name}}" ng-repeat="course in quarter.courses"></course>
     </md-card-content>
 </md-card>

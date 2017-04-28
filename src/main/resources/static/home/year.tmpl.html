@@ -1,10 +1,10 @@
 <md-card>
-    <md-card-title>
+    <md-card-title class="year-header">
         <md-card-title-text>
             <span class="md-headline">{{year.name}}</span>
         </md-card-title-text>
     </md-card-title>
-    <md-card-content class="flowchartSpace {{quarter.id}}">
+    <md-card-content class="yearCard {{year.id}}" layout="row">
         <quarter ng-repeat="quarter in year.quarters"></quarter>
     </md-card-content>
 </md-card>
