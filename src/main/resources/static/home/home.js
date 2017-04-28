@@ -203,22 +203,27 @@ angular.module('sample.home', [
 
 
         $scope.createFlowchart = function () {
-            $http({
-                url: $rootScope.server_root + '/flowchart',
-                method: 'POST',
-                headers: {
-                    'X-Auth-Token': $scope.jwt
-                },
-                data: {
-                    'name': "test create"
-                }
-            }).then(function (response) {
-                $scope.name = response.data.name;
-            }, function (error) {
-                console.log(error);
-            });
+            if ($scope.flowchartArr.length < 5) {
+                $http({
+                    url: $rootScope.server_root + '/flowchart',
+                    method: 'POST',
+                    headers: {
+                        'X-Auth-Token': $scope.jwt
+                    },
+                    data: {
+                        'name': "New Flowchart"
+                    }
+                }).then(function (response) {
+                    $scope.name = response.data.name;
+                }, function (error) {
+                    console.log(error);
+                });
 
-            $scope.refreshFlowchart();
+                $scope.refreshFlowchart();
+            }
+            else {
+                //error dialog
+            }
         };
     })
     .directive('year', function() {
