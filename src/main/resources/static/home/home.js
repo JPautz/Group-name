@@ -26,6 +26,7 @@ angular.module('sample.home', [
 
         $scope.content = [];
         $scope.quarterArr = [];
+        $scope.flowchartArr = [];
 
         $scope.getContent = function () {
             var errorText;
@@ -38,6 +39,8 @@ angular.module('sample.home', [
             }).then(function (response) {
                 $scope.content = response.data;
                 $scope.quarterArr = response.data.flowcharts[0].quarters;
+                $scope.flowchartArr = response.data.flowcharts;
+                //console.log
             }, function (error) {
                 console.log(error);
                 if (error.status == 500) {
@@ -222,8 +225,42 @@ angular.module('sample.home', [
             $mdSidenav('left').close();
         };
     })
-    .controller('ManageFlowchartMenu', function($scope) {
+    .controller('ManageFlowchartMenu', function($scope, $http, store, jwtHelper, $rootScope) {
         $scope.showMenu = false;
+
+        $scope.refreshFlowchart = function () {
+            $http({
+                url: $rootScope.server_root + 'user',
+                method: 'GET',
+                headers: {
+                    'X-Auth-Token': $scope.jwt
+                }
+            }).then(function (response) {
+                $scope.flowchartArr = response.data.flowcharts;
+            });
+        };
+
+
+        $scope.createFlowchart = function () {
+            $http({
+                url: $rootScope.server_root + '/flowchart',
+                method: 'POST',
+                headers: {
+                    'X-Auth-Token': $scope.jwt
+                },
+                data: {
+                    'name': "test create"
+                }
+            }).then(function (response) {
+                $scope.name = response.data.name;
+                //console.log(response);
+                //$scope.flowchartArr.push(response.data.name);
+            }, function (error) {
+                console.log(error);
+            });
+
+            $scope.refreshFlowchart();
+        };
     })
     .directive('quarter', function () {
         return {

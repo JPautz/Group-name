@@ -139,7 +139,7 @@ body {
 }
 
 md-list {
-  transition: ease 0.5s;
+  transition: ease-out 0.5s;
   height: 300px;
 }
 
