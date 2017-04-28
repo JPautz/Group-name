@@ -201,6 +201,7 @@ angular.module('sample.home', [
             });
         };
 
+
         $scope.createFlowchart = function () {
             $http({
                 url: $rootScope.server_root + '/flowchart',
